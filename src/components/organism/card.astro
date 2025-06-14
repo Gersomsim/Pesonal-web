@@ -1,0 +1,18 @@
+---
+const { image, title, description, link, text  } = Astro.props;
+---
+<div class="card shadow-sm">
+  <figure>
+    <img
+      src={image}
+      alt={title} />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title text-success">{title}</h2>
+    <p>{description}</p>
+    <slot />
+    <div class="card-actions justify-end">
+      <a href={link} class="btn btn-secondary">{text}</a>
+    </div>
+  </div>
+</div>

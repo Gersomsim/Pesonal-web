@@ -1,11 +1,186 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import SocialMedia from '../components/social-media.astro';
+import Skils from '../components/skils.astro'
+import Layout from '../layouts/Layout.astro';
+import Profile from '../assets/38233407.jpg';
+import Card from '../components/organism/card.astro';
+import EcoSuite from '../assets/ecosuite.png';
+import Crm from '../assets/crm.png';
+import Aquos from '../assets/aquos.png';
+import Bg from '../assets/bg.jpg';
+import Portafolio from '../components/portfolio.astro';
+
 ---
 
 <Layout>
-	<Welcome />
+	<div class="container flex flex-col lg:flex-row gap-5 relative">
+		<aside class="hidden lg:block lg:w-1/4 pb-5">
+			<div class="overflow-y-auto scrollbarStyle h-[calc(100vh-2rem)] sticky top-15">
+				<div class="bg-base-100 rounded-xl p-6">
+					<div class="w-fit mx-auto relative">
+						<img alt="user" loading="lazy" width="130" height="130" decoding="async" data-nimg="1" class="mask mask-hexagon" style="" 
+						src={Profile.src}>
+						<svg class="absolute bottom-0 right-0" width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="12.9668" cy="12" r="10" fill="#01bce4" stroke="#151B2F" stroke-width="4"></circle>
+						</svg>
+					</div>
+					<h3 class="text-base-content text-xl font-semibold text-center mt-7 handwriting">Gersom Hernandez</h3>
+					<p class="text-xs font-medium bg-primary/10 text-primary rounded-3xl px-3 w-fit mt-3 mx-auto py-1">Frontend Developer</p>
+					<SocialMedia />
+					<div class="border-b border-base-content/10 py-6 space-y-3">
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Email</p>
+							<a href="mailto: gersomhernandez@me.com" class="text-sm text-base-content/60 hover:text-primary hover:duration-300 transition">
+							gersomhernandez(at)me.com
+							</a>
+						</div>
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Teléfono</p>
+							<a href="tel:+52 55 6141 9602" class="text-sm text-base-content/60 hover:text-primary hover:duration-300 transition">+52 55 6141 9602</a>
+						</div>
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Residencia:</p>
+							<span class="text-sm text-base-content/60">México</span>
+						</div>
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Ciudad:</p>
+							<span class="text-sm text-base-content/60">Cuernavaca</span>
+						</div>
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Edad:</p>
+							<span class="text-sm text-base-content/60">37 años</span>
+						</div>
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Status:</p>
+							<span class="text-sm text-base-content/60">Disponible</span>
+						</div>
+						<div class="flex items-center justify-between">
+							<p class="text-sm text-base-content">Idiomas:</p>
+							<span class="text-sm text-base-content/60">Españos, Ingles[40%]</span>
+						</div>
+					</div>
+					<Skils />
+
+
+					<a class="flex items-center justify-center gap-8 text-base font-medium text-primary-content btn btn-primary rounded-lg py-3 text-center w-full" href="/CV.pdf">
+						<i class="fa-solid fa-cloud-arrow-down"></i>
+						Descargar CV
+					</a>
+				</div>
+			</div>
+		</aside>
+		<div class="block w-full max-w-5xl mx-auto">
+			<div
+				class="hero min-h-screen"
+				style={`background-image: url(${Bg.src});`}
+			>
+				<div class="hero-overlay"></div>
+				<div class="hero-content text-neutral-content text-center">
+					<div class="max-w-xl">
+						<h1 class="mb-5 text-5xl font-bold">
+							<span class="text-accent handwriting">Gersom</span> <br>
+							<small class="">
+								<span class="text-secondary">Frontend</span> Developer
+							</small>
+						</h1>
+						<p class="mb-5 font-light">
+							Desarrollador Fullstack con más de 10 años de experiencia en el desarrollo de aplicaciones web, desde el frontend hasta el backend, pasando por la base de datos y el diseño de la interfaz de usuario.
+						</p>
+						<a class="btn btn-accent btn-outline" href="/CV.pdf">
+							<i class="fa-solid fa-cloud-arrow-down"></i>
+							Descargar CV
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="mt-10 px-4 lg:px-0">
+				<h2 class="text-2xl font-light mb-5 text-accent text-center lg:text-left">
+					&lt;Sobre mi /&gt;
+				</h2>
+				<div class="flex items-start justify-center gap-4 flex-col md:flex-row">
+					<img src={Profile.src} alt="Gersom Hernandez" class="w-1/2 md:w-1/5 mask mask-hexagon mx-auto lg:mx-0">
+					<div class="w-full md:w-4/5">
+						
+						<p class=" font-light text-base-content/60 mt-5">
+							Hola, soy <span class="text-secondary">Gersom Hernandez</span>, un apasionado programador con experiencia en desarrollo Front-end con Angular y Back-end con Laravel y NestJS. Mi dominio se extiende a bases de datos PostgreSQL, MySQL, MongoDB y arquitecturas como Hexagonal, MVC y de Capas, utilizando Git y GitHub para un control de versiones eficiente.
+						</p>
+						<p class=" font-light text-base-content/60 mt-5">
+							Constantemente busco nuevos desafíos para aprender y aplicar mis conocimientos. Mi compromiso con la programación y la calidad del código es tan fuerte como mi amor por la música y la guitarra. Te invito a explorar mi portafolio y mi blog, donde comparto mi conocimiento y experiencia.
+						</p>
+						<p class=" font-light text-base-content/60 mt-5">
+							Soy una persona honesta, leal y seria, lista para aportar soluciones innovadoras a tu equipo.
+						</p>
+					</div>
+				</div>
+				<div class="mt-5 lg:hidden">
+					<Skils />
+				</div>
+			</div>
+
+			<div class="mt-10 px-4 lg:px-0">
+				<h2 class="text-2xl font-light mb-5 text-accent text-center lg:text-left">
+					&lt;Portafolio /&gt;
+				</h2>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+					<Portafolio />
+				</div>
+			</div>
+
+			<div class="mt-10 px-4 lg:px-0">
+				<h2 class="text-2xl font-light mb-5 text-accent text-center lg:text-left">
+					&lt;Mi experiencia /&gt;
+				</h2>
+				<p class="font-light text-base-content/60 mt-5">
+					En esta sección podrás ver los proyectos en los que he trabajado, en todos estos proyectos he estado desde el diseño de la base de datos hasta el desarrollo de la aplicación web, tome decisiones de diseño, desarrollo y arquitectura de la aplicación.
+				</p>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+					<Card 
+						image={EcoSuite.src}
+						title="ERP: Eco-Suite"
+						description="Se diseño la aplicación web, API Rest y base de datos para la empresa Aclara, modulos que se desarrollaron fueron: Almacen, Compras, Ventas, Contabilidad, Humanos, Reportes y administración de recursos."
+						link="https://eco-suite.app"
+						text="Visitar"
+					>
+					<div class="card-actions">
+						<div class="badge badge-outline">Angular</div>
+						<div class="badge badge-outline">PHP</div>
+						<div class="badge badge-outline">Laravel</div>
+						<div class="badge badge-outline">PostgreSQL</div>
+					</div>
+					</Card>
+					<Card 
+						image={Crm.src}
+						title="CRM: Aclara"
+						description="Aplicación para la empresa Aclara, se dearrollo la aplicación fullstack con Laravel 8, se diseño la base de datos con MySQL, modulos que se desarrollaron fueron: Clientes, Proyectos, Tareas y Cotizaciones."
+						link="https://crm-aclara.com"
+						text="Visitar"
+					>
+					<div class="card-actions">
+						<div class="badge badge-outline">Livewire</div>
+						<div class="badge badge-outline">PHP</div>
+						<div class="badge badge-outline">Laravel</div>
+						<div class="badge badge-outline">MySQL</div>
+					</div>
+					</Card>
+					<Card 
+						image={Aquos.src}
+						title="ERP: Aquos"
+						description="Aplicación para la empresa Aquos, se dearrollo la aplicación fullstack con Laravel 8, se diseño la base de datos con MySQL, modulos que se desarrollaron fueron: Clientes, Contabilidad, Soporte y pasarela de pagos con Stripe."
+						link="https://aguaaquos.com"
+						text="Visitar"
+					>
+					<div class="card-actions">
+						<div class="badge badge-outline">Livewire</div>
+						<div class="badge badge-outline">PHP</div>
+						<div class="badge badge-outline">Laravel</div>
+						<div class="badge badge-outline">MySQL</div>
+					</div>
+					</Card>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
 </Layout>

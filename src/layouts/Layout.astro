@@ -1,15 +1,95 @@
-<!doctype html>
-<html lang="en">
+---
+import LinkNavbar from '../components/link-navbar.astro'
+import "../styles/global.css";
+import SocialMedia from '../components/social-media.astro';
+
+---
+
+<!doctype html >
+<html lang="en" data-theme="nigth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<script src="https://kit.fontawesome.com/61f5902346.js" crossorigin="anonymous"></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Hand+Pre:wght@400..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
-		<slot />
+		<div class="relative w-full h-full overflow-auto" id="main">
+			<div class="navbar bg-base-100 shadow-sm sticky top-0 z-10">
+				<div class="flex-none">
+					<button class="btn btn-square btn-ghost" id="menu-button" onclick="toggleMenu()">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg>
+					</button>
+				</div>
+				<div class="flex-1">
+					<a class="btn btn-ghost text-xl handwriting">Gersom</a>
+				</div>
+			</div>
+			<div class="fixed w-full md:w-1/5 left-[-100%] top-0 bottom-0 z-20 bg-gray-800/99 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-400" id="menu">
+				<div class="pt-5 px-2 mb-5">
+					<button class="btn btn-outline btn-error btn-xs" onclick="toggleMenu()">
+						<i class="fa-solid fa-xmark text-2xl"></i>
+						<span class="sr-only">
+							Close menu
+						</span>
+					</button>
+				</div>
+				<nav class="flex flex-col gap-4 px-4">
+					<LinkNavbar href="/" icon="fa-solid fa-house" text="Home" />
+					<LinkNavbar href="/" icon="fa-solid fa-user" text="Acerca de mí" />
+					<LinkNavbar href="/" icon="fa-solid fa-briefcase" text="Proyectos" />
+					<LinkNavbar href="/" icon="fa-solid fa-newspaper" text="Blog" />
+				</nav>
+			</div>
+			<div class="container mx-auto z-10 transition-all duration-400 pb-10" id="content">
+				<slot />
+			</div>
+		</div>
+		<footer class="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+			<aside>
+				<h4 class="text-2xl handwriting flex items-center gap-2 text-accent">
+					<i class="fa-solid fa-code text-4xl "></i>
+					Gersomsim
+				</h4>	
+				<p class="text-center font-light text-base-content/60 mt-2">
+					Desarrollador Fullstack
+				</p>
+			</aside>
+			<nav>
+				<h6 class="footer-title">Social</h6>
+				<div class="grid grid-flow-col gap-4">
+					<a href="https://github.com/gersomsim" target="_blank" class="link link-hover">
+						<i class="fa-brands fa-github text-2xl"></i>
+					</a>
+					<a href="https://www.linkedin.com/in/gersom-hernandez/" target="_blank" class="link link-hover">
+						<i class="fa-brands fa-linkedin text-2xl"></i>
+					</a>
+					<a href="https://www.twitter.com/gersomsim" target="_blank" class="link link-hover">
+						<i class="fa-brands fa-twitter text-2xl"></i>
+					</a>
+					<a href="https://dev.to/gersomsim" target="_blank" class="link link-hover">
+						<i class="fa-brands fa-dev text-2xl"></i>
+					</a>
+
+				</div>
+
+			</nav>
+		</footer>
 	</body>
+	<script is:inline>
+		function toggleMenu() {
+			const menu = document.getElementById('menu');
+			menu.classList.toggle('left-0');
+			menu.classList.toggle('left-[-100%]');
+			const content = document.getElementById('content');
+			content.classList.toggle('blur-sm');
+		}
+	</script>
 </html>
 
 <style>

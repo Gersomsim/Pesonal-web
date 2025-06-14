@@ -1,0 +1,15 @@
+---
+const { skil, level } = Astro.props;
+---
+
+
+<div>
+  <div class="flex items-center justify-between">
+    <p class="text-sm font-medium text-base-content">{skil}</p>
+    <span class="text-xs text-base-content/60">{level}%</span>
+  </div>
+    <div class="w-full h-1 bg-base-content/10 rounded-md relative mt-2">
+      <div style={`width: ${level}%`} class="rounded-md absolute bg-secondary h-1">
+      </div>
+    </div>
+  </div>

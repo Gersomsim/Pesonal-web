@@ -1,0 +1,9 @@
+{
+  "workbench.activityBar.location": "top",
+  "workbench.activityBar.orientation": "horizontal",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
