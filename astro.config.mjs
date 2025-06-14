@@ -5,9 +5,15 @@ import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://gersom.me',
   vite: { plugins: [tailwindcss()] },
+
+  output: 'server',
 
   adapter: node({
     mode: 'standalone',
   }),
+  server: {
+    host: '0.0.0.0',
+  },
 });
