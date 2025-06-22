@@ -1,146 +1,61 @@
-<div class="card bg-base-100 shadow-sm">
-  <div class="card-body">
-    <span class="badge badge-xs badge-warning">
-      Reciente
-    </span>
-    <div class="flex justify-between">
-      <h2 class="text-2xl font-bold">Event Manager</h2>
-      <span class="text-lg text-primary">Front</span>
-    </div>
-    <p class="text-sm text-base-content/60 mt-2">
-      Event Manager es una aplicación web para la gestión de eventos, se desarrollo con Angular, se diseño la base de datos con PostgreSQL, modulos que se desarrollaron fueron: Eventos, Usuarios. Se utilizo Tailwind CSS para el diseño y algunos componentes de Flowbite.
-    </p>
-    <ul class="mt-2 flex flex-col gap-2 text-xs">
-      <li class="flex items-center justify-between">
-        <span>
-          <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>Angular</span>
+---
+import projects from '../data/projects.json';
+
+interface Technology {
+  name: string;
+  github: string | null;
+}
+
+interface Project {
+  id: number;
+  title: string;
+  type: string;
+  status: string;
+  statusText: string;
+  description: string;
+  technologies: Technology[];
+  link: string;
+  linkText: string;
+}
+---
+
+{projects.map((project: Project) => (
+  <div class="card bg-base-100 shadow-sm">
+    <div class="card-body">
+      {project.status && (
+        <span class={`badge badge-xs ${project.status === 'reciente' ? 'badge-warning' : 'badge-error'}`}>
+          {project.statusText}
         </span>
-        <a href="https://github.com/Gersomsim/Event-manager-Front" target="_blank" class="btn btn-xs btn-outline btn-success ml-2">
-          <i class="fa-brands fa-github"></i>
+      )}
+      <div class="flex justify-between">
+        <h2 class="text-2xl font-bold">{project.title}</h2>
+        <span class="text-lg text-primary">{project.type}</span>
+      </div>
+      <p class="text-sm text-base-content/60 mt-2">
+        {project.description}
+      </p>
+      <ul class="mt-2 flex flex-col gap-2 text-xs">
+        {project.technologies.map((tech: Technology) => (
+          <li class="flex items-center justify-between">
+            <span>
+              <i class="fa-solid fa-code text-success mr-2"></i>
+              <span>{tech.name}</span>
+            </span>
+            {tech.github && (
+              <a href={tech.github} target="_blank" class="btn btn-xs btn-outline btn-success ml-2">
+                <i class="fa-brands fa-github"></i>
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+      <div class="mt-2">
+        <a href={project.link} target="_blank" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-globe"></i>
+          {project.linkText}
         </a>
-      </li>
-    </ul>
-    <div class="mt-2">
-      <a href="https://event-manager.com" target="_blank" class="btn btn-primary btn-block">
-        <i class="fa-solid fa-globe"></i>
-        Visitar
-      </a>
+      </div>
     </div>
   </div>
-</div>
-
-<div class="card bg-base-100 shadow-sm">
-  <div class="card-body">
-    <div class="flex justify-between">
-      <h2 class="text-2xl font-bold">Event Manager </h2>
-      <span class="text-lg text-primary">API</span>
-    </div>
-    <p class="text-sm text-base-content/60 mt-2">
-      Event Manager API es una API para la gestión de eventos, se desarrollo con Laravel 10, se diseño la base de datos con PostgreSQL, modulos que se desarrollaron fueron: Eventos, Usuarios, Comentarios, Calificaciones, etc.
-    </p>
-    <ul class="mt-2 flex flex-col gap-2 text-xs">
-      <li class="flex items-center justify-between">
-        <span>
-          <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>Laravel 10</span>
-        </span>
-        <a href="https://github.com/Gersomsim/Event-manager" target="_blank" class="btn btn-xs btn-outline btn-success ml-2">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-      <li>
-        <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>PostgreSQL</span>
-      </li>
-      <li>
-        <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>MongoDB</span>
-      </li>
-    </ul>
-    <div class="mt-2">
-      <a href="https://event-manager.com" target="_blank" class="btn btn-primary btn-block">
-        <i class="fa-solid fa-globe"></i>
-        Visitar
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="card bg-base-100 shadow-sm">
-  <div class="card-body">
-    <span class="badge badge-xs badge-error">
-      En desarrollo
-    </span>
-    <div class="flex justify-between">
-      <h2 class="text-2xl font-bold">Blog Personal</h2>
-      <span class="text-lg text-primary">Astro</span>
-    </div>
-    <p class="text-sm text-base-content/60 mt-2">
-      Blog Personal para compartir mis conocimientos y experiencias, se desarrollo con Astro, generacion estatica con markdown, diseño responsivo, se utilizo Tailwind CSS para el diseño.
-    </p>
-    <ul class="mt-2 flex flex-col gap-2 text-xs">
-      <li class="flex items-center justify-between">
-        <span>
-          <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>Astro</span>
-        </span>
-        <a href="https://github.com/Gersomsim/Event-manager-Front" target="_blank" class="btn btn-xs btn-outline btn-success ml-2">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-    </ul>
-    <div class="mt-2">
-      <a href="https://event-manager.com" target="_blank" class="btn btn-primary btn-block">
-        <i class="fa-solid fa-globe"></i>
-        Visitar
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="card bg-base-100 shadow-sm">
-  <div class="card-body">
-    <span class="badge badge-xs badge-error">
-      En desarrollo
-    </span>
-    <div class="flex justify-between">
-      <h2 class="text-2xl font-bold">Gestion de inventario</h2>
-      <span class="text-lg text-primary">API</span>
-    </div>
-    <p class="text-sm text-base-content/60 mt-2">
-      Gestion de inventario, se desarrollo con NestJS y TypeORM, se diseño la base de datos con PostgreSQL, modulos que se desarrollaron fueron: Productos, Usuarios, Salidas, Entradas, Transferencias, Stocks, etc.
-    </p>
-    <ul class="mt-2 flex flex-col gap-2 text-xs">
-      <li class="flex items-center justify-between">
-        <span>
-          <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>NestJS</span>
-        </span>
-        <a href="https://github.com/Gersomsim/Event-manager-Front" target="_blank" class="btn btn-xs btn-outline btn-success ml-2">
-          <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-      <li class="flex items-center justify-between">
-        <span>
-          <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>TypeORM</span>
-        </span>
-      </li>
-      <li class="flex items-center justify-between">
-        <span>
-          <i class="fa-solid fa-code text-success mr-2"></i>
-        <span>PostgreSQL</span>
-        </span>
-      </li>
-
-    </ul>
-    <div class="mt-2">
-      <a href="https://event-manager.com" target="_blank" class="btn btn-primary btn-block">
-        <i class="fa-solid fa-globe"></i>
-        Visitar
-      </a>
-    </div>
-  </div>
-</div>
+))}
 

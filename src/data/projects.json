@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Clon de Trello",
+    "type": "Front",
+    "status": "reciente",
+    "statusText": "Reciente",
+    "description": "Desarrollo de un clon de Trello, con Angular, se utilizo Tailwind CSS para el diseño y el cdk de angular para la creación de componentes dinamicos. El proyecto no esta conectado a ninguna api solo se gestiona por el localstorage. usuario: admin@example.com contraseña: 1234567890",
+    "technologies": [
+      {
+        "name": "Angular",
+        "github": "https://github.com/Gersomsim/Trello-clone"
+      }
+    ],
+    "link": "https://trello-clone-nine-puce.vercel.app",
+    "linkText": "Visitar"
+  }
+]

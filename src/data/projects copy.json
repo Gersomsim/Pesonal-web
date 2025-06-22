@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Event Manager",
+    "type": "Front",
+    "status": "reciente",
+    "statusText": "Reciente",
+    "description": "Event Manager es una aplicación web para la gestión de eventos, se desarrollo con Angular, se diseño la base de datos con PostgreSQL, modulos que se desarrollaron fueron: Eventos, Usuarios. Se utilizo Tailwind CSS para el diseño y algunos componentes de Flowbite.",
+    "technologies": [
+      {
+        "name": "Angular",
+        "github": "https://github.com/Gersomsim/Event-manager-Front"
+      }
+    ],
+    "link": "https://event-manager.com",
+    "linkText": "Visitar"
+  },
+  {
+    "id": 2,
+    "title": "Event Manager",
+    "type": "API",
+    "status": "reciente",
+    "statusText": "Reciente",
+    "description": "Event Manager API es una API para la gestión de eventos, se desarrollo con Laravel 10, se diseño la base de datos con PostgreSQL, modulos que se desarrollaron fueron: Eventos, Usuarios, Comentarios, Calificaciones, etc.",
+    "technologies": [
+      {
+        "name": "Laravel 10",
+        "github": "https://github.com/Gersomsim/Event-manager"
+      },
+      {
+        "name": "PostgreSQL",
+        "github": null
+      },
+      {
+        "name": "MongoDB",
+        "github": null
+      }
+    ],
+    "link": "https://event-manager.com",
+    "linkText": "Visitar"
+  },
+  {
+    "id": 3,
+    "title": "Blog Personal",
+    "type": "Astro",
+    "status": "desarrollo",
+    "statusText": "En desarrollo",
+    "description": "Blog Personal para compartir mis conocimientos y experiencias, se desarrollo con Astro, generacion estatica con markdown, diseño responsivo, se utilizo Tailwind CSS para el diseño.",
+    "technologies": [
+      {
+        "name": "Astro",
+        "github": "https://github.com/Gersomsim/Event-manager-Front"
+      }
+    ],
+    "link": "https://event-manager.com",
+    "linkText": "Visitar"
+  },
+  {
+    "id": 4,
+    "title": "Gestion de inventario",
+    "type": "API",
+    "status": "desarrollo",
+    "statusText": "En desarrollo",
+    "description": "Gestion de inventario, se desarrollo con NestJS y TypeORM, se diseño la base de datos con PostgreSQL, modulos que se desarrollaron fueron: Productos, Usuarios, Salidas, Entradas, Transferencias, Stocks, etc.",
+    "technologies": [
+      {
+        "name": "NestJS",
+        "github": "https://github.com/Gersomsim/Event-manager-Front"
+      },
+      {
+        "name": "TypeORM",
+        "github": null
+      },
+      {
+        "name": "PostgreSQL",
+        "github": null
+      }
+    ],
+    "link": "https://event-manager.com",
+    "linkText": "Visitar"
+  }
+]
