@@ -1,48 +1,177 @@
-# Astro Starter Kit: Basics
+# 🚀 Gersom Hernandez - Página Personal
 
-```sh
-npm create astro@latest -- --template basics
+[![Astro](https://img.shields.io/badge/Astro-5.9.2-FF5D01?logo=astro)](https://astro.build)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.10-38B2AC?logo=tailwind-css)](https://tailwindcss.com)
+[![DaisyUI](https://img.shields.io/badge/DaisyUI-5.0.43-5A0EF8?logo=daisyui)](https://daisyui.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Página web personal de **Gersom Hernandez**, desarrollador Fullstack con más de 10 años de experiencia. Este proyecto está construido con tecnologías modernas y está abierto a contribuciones de la comunidad.
+
+## 🌟 Características
+
+### ✨ Diseño y UX
+
+- **Diseño responsivo** que se adapta a todos los dispositivos
+- **Tema oscuro** con DaisyUI para una experiencia visual moderna
+- **Tipografía personalizada** con fuentes Google Fonts
+- **Animaciones suaves** y transiciones fluidas
+- **Navegación intuitiva** con menú lateral y navbar
+
+### 🛠️ Funcionalidades
+
+- **Perfil profesional** con información personal y de contacto
+- **Portafolio de proyectos** con tecnologías utilizadas
+- **Sección de habilidades** técnicas organizadas por categorías
+- **Experiencia laboral** con proyectos destacados
+- **Enlaces a redes sociales** y plataformas profesionales
+- **Descarga de CV** en formato PDF
+- **Blog** (en desarrollo)
+
+### 📱 Componentes Principales
+
+- **Sidebar informativo** con perfil y datos de contacto
+- **Hero section** con llamada a la acción
+- **Sección "Sobre mí"** con información personal
+- **Grid de proyectos** con cards interactivas
+- **Timeline de experiencia** laboral
+- **Footer** con enlaces sociales
+
+## 🛠️ Tecnologías Utilizadas
+
+### Frontend
+
+- **[Astro](https://astro.build)** - Framework web para sitios estáticos
+- **[Tailwind CSS](https://tailwindcss.com)** - Framework CSS utility-first
+- **[DaisyUI](https://daisyui.com)** - Component library para Tailwind CSS
+- **[Font Awesome](https://fontawesome.com)** - Iconos vectoriales
+
+### Herramientas de Desarrollo
+
+- **[Node.js](https://nodejs.org)** - Runtime de JavaScript
+- **[Prettier](https://prettier.io)** - Formateador de código
+- **[TypeScript](https://www.typescriptlang.org)** - Tipado estático
+
+### Despliegue
+
+- **Railway** - Plataforma de hosting
+- **Vercel** - Despliegue de proyectos
+
+## 📁 Estructura del Proyecto
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
+gersomsim/
+├── public/                 # Archivos estáticos
+│   ├── favicon.svg
+│   └── robots.txt
 ├── src/
-│   ├── layouts/
+│   ├── assets/            # Imágenes y recursos
+│   │   ├── atoms/        # Componentes atómicos
+│   │   ├── organism/     # Componentes complejos
+│   │   ├── portfolio.astro
+│   │   ├── skils.astro
+│   │   ├── social-media.astro
+│   │   └── timeline.astro
+│   ├── data/             # Datos JSON
+│   │   └── projects.json
+│   ├── layouts/          # Layouts de página
 │   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── pages/            # Páginas de la aplicación
+│   │   ├── index.astro
+│   │   └── about-me.astro
+│   └── styles/           # Estilos globales
+│       └── global.css
+├── astro.config.mjs      # Configuración de Astro
+├── package.json          # Dependencias y scripts
+└── README.md
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Comenzando
 
-## 🧞 Commands
+### Prerrequisitos
 
-All commands are run from the root of the project, from a terminal:
+- Node.js >= 18.0.0
+- npm o yarn
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Instalación
 
-## 👀 Want to learn more?
+1. **Clona el repositorio**
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+   ```bash
+   git clone https://github.com/gersomsim/gersomsim.git
+   cd gersomsim
+   ```
+
+2. **Instala las dependencias**
+
+   ```bash
+   npm install
+   ```
+
+3. **Ejecuta el servidor de desarrollo**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Abre tu navegador**
+   ```
+   http://localhost:4321
+   ```
+
+## 📜 Scripts Disponibles
+
+| Comando           | Descripción                           |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Inicia el servidor de desarrollo      |
+| `npm run build`   | Construye el proyecto para producción |
+| `npm run preview` | Previsualiza la build localmente      |
+| `npm run start`   | Sirve la build de producción          |
+
+## 🤝 Contribuciones
+
+¡Las contribuciones son bienvenidas! Este es un proyecto personal pero abierto a mejoras de la comunidad.
+
+### Cómo Contribuir
+
+1. **Fork** el proyecto
+2. **Crea** una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. **Push** a la rama (`git push origin feature/AmazingFeature`)
+5. **Abre** un Pull Request
+
+### Áreas de Mejora
+
+- 🎨 Mejoras en el diseño y UX
+- 📱 Optimización para dispositivos móviles
+- ⚡ Mejoras de rendimiento
+- 🧪 Tests unitarios y de integración
+- 📝 Documentación adicional
+- 🌐 Nuevas funcionalidades
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👨‍💻 Sobre el Autor
+
+**Gersom Hernandez** es un desarrollador Fullstack con más de 10 años de experiencia en:
+
+- **Frontend**: Angular, Astro
+- **Backend**: Laravel, NestJS, PHP
+- **Bases de Datos**: PostgreSQL, MySQL, MongoDB
+- **Arquitecturas**: Hexagonal, MVC, Capas
+- **Herramientas**: Git, GitHub, Docker
+
+### Contacto
+
+- 🌐 **Sitio Web**: [gersom.me](https://gersom.me)
+- 📧 **Email**: gersomhernandez@me.com
+- 📱 **Teléfono**: +52 55 6141 9602
+- 💼 **LinkedIn**: [gersom-hernandez](https://www.linkedin.com/in/gersom-hernandez/)
+- 🐙 **GitHub**: [gersomsim](https://github.com/gersomsim)
+- 🐦 **Twitter**: [@gersomsim](https://www.twitter.com/gersomsim)
+- 📝 **Blog**: [Dev.to](https://dev.to/gersomsim)
+
+---
+
+⭐ **Si este proyecto te ha sido útil, considera darle una estrella en GitHub!**
