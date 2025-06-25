@@ -1,9 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import BlogPost from '../../components/BlogPost.astro';
-import BlogSearch from '../../components/BlogSearch.astro';
-import BlogSidebar from '../../components/BlogSidebar.astro';
+import BlogPosts from '../../blog/templates/BlogPosts.jsx';
+import BlogSidebar from '../../blog/templates/BlogSidebar.astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
@@ -16,13 +15,14 @@ const postsData = posts.map(post => ({
   description: post.data.description,
   author: post.data.author,
   pubDate: post.data.pubDate.toISOString(),
-  tags: post.data.tags || []
+  tags: post.data.tags || [],
+  image: post.data.image || null
 }));
 ---
 
 <Layout title="Mi Blog Astro" description="Bienvenido a mi blog personal de desarrollo web y algunas cosas más">
   <!-- Hero Section -->
-  <div class="hero min-h-[40vh] bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl mb-12">
+  <div class="hero mt-5 min-h-[40vh] bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl mb-12">
     <div class="hero-content text-center">
       <div class="max-w-2xl">
         <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -48,10 +48,6 @@ const postsData = posts.map(post => ({
   <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
     <!-- Main Content -->
     <main class="lg:col-span-3">
-      <!-- Search Section -->
-      <div class="mb-8">
-        <BlogSearch postsData={postsData} />
-      </div>
 
       <!-- Posts Section -->
       <div class="space-y-8">
@@ -67,14 +63,19 @@ const postsData = posts.map(post => ({
         
         <!-- Posts Grid -->
         <div class="grid gap-8" id="posts-container">
-          {posts.slice(0, 6).map((post) => (
-            <BlogPost post={post} />
-          ))}
+
+          <BlogPosts 
+            posts={posts.slice(0, 6).map(post => ({
+              ...post.data,
+              slug: post.slug
+            }))} 
+            client:only="react"
+          />
         </div>
         
         <!-- No Results -->
         <div class="text-center py-12" id="no-results" style="display: none;">
-          <div class="card   shadow-lg">
+          <div class="card bg-base-100 dark:bg-base-800 shadow-lg">
             <div class="card-body">
               <i class="fa-solid fa-search text-6xl text-base-content/30 mb-4"></i>
               <h3 class="text-2xl font-bold mb-2">No se encontraron resultados</h3>
@@ -171,48 +172,12 @@ const postsData = posts.map(post => ({
         noResults.style.display = 'block';
         pagination.style.display = 'none';
       } else {
-        postsContainer.innerHTML = paginatedPosts.map(post => `
-          <article class="card   shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300 hover:border-primary/30 group">
-            <div class="card-body">
-              <div class="flex items-start justify-between mb-4">
-                <div class="flex-1">
-                  <a href="/blog/${post.slug}" class="no-underline group-hover:no-underline">
-                    <h2 class="card-title text-2xl font-bold group-hover:text-primary transition-colors duration-300 mb-3">
-                      ${post.title}
-                    </h2>
-                  </a>
-                  <p class="text-base-content/70 text-lg leading-relaxed mb-4">
-                    ${post.description}
-                  </p>
-                </div>
-              </div>
-              
-              <div class="card-actions justify-between items-center">
-                <div class="flex items-center gap-4 text-sm text-base-content/60">
-                  <div class="flex items-center gap-2">
-                    <i class="fa-regular fa-calendar text-primary"></i>
-                    <span>${new Date(post.pubDate).toLocaleDateString('es-ES', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <i class="fa-regular fa-user text-primary"></i>
-                    <span>${post.author}</span>
-                  </div>
-                </div>
-                
-                <a href="/blog/${post.slug}" class="btn btn-primary btn-sm group-hover:btn-outline transition-all duration-300">
-                  <span>Leer más</span>
-                  <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-        `).join('');
-        
-        postsContainer.style.display = 'grid';
+        // Renderiza usando React
+        const root = ReactDOM.createRoot(postsContainer);
+        root.render(
+          <BlogPosts posts={paginatedPosts} />
+        );
+        postsContainer.style.display = 'block';
         noResults.style.display = 'none';
       }
       
