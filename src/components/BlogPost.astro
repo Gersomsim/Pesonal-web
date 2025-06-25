@@ -1,0 +1,19 @@
+---
+export interface Props {
+  post: any;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="mb-10">
+  <a href={`/blog/${post.slug}`} class="no-underline">
+    <h2 class="text-xl font-bold hover:text-blue-600">{post.data.title}</h2>
+  </a>
+  <p class="text-gray-600">{post.data.description}</p>
+  <div class="flex items-center text-sm text-gray-500">
+    <span>{post.data.pubDate.toLocaleDateString('es-ES')}</span>
+    <span class="mx-2">•</span>
+    <span>{post.data.author}</span>
+  </div>
+</div>
