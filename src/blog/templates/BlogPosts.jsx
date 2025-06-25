@@ -1,3 +1,5 @@
+import React from 'react';
+
 // BlogPosts.jsx
 export default function BlogPosts({ posts }) {
   return (
@@ -32,11 +34,11 @@ export default function BlogPosts({ posts }) {
             <div className="flex items-center gap-4 text-sm text-base-content/60">
               <div className="flex items-center gap-2">
                 <i className="fa-regular fa-calendar text-secondary"></i>
-                <span class="dark:text-gray-200">{formatDate(post.pubDate)}</span>
+                <span className="dark:text-gray-200">{formatDate(post.pubDate)}</span>
               </div>
               <div className="flex items-center gap-2">
                 <i className="fa-regular fa-user text-secondary"></i>
-                <span class="dark:text-gray-200">{post.author}</span>
+                <span className="dark:text-gray-200">{post.author}</span>
               </div>
             </div>
             <a

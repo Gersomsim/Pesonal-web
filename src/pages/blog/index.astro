@@ -37,7 +37,7 @@ const postsData = posts.map(post => ({
               <i class="fa-solid fa-newspaper text-3xl"></i>
             </div>
             <div class="stat-title">Artículos</div>
-            <div class="stat-value text-primary" id="total-posts">{posts.length}</div>
+            <div class="stat-value text-primary">{posts.length}</div>
           </div>
         </div>
       </div>
@@ -56,53 +56,12 @@ const postsData = posts.map(post => ({
           <div class="divider divider-primary flex-1"></div>
         </div>
         
-        <!-- Loading State -->
-        <div class="flex justify-center py-12" id="loading" style="display: none;">
-          <span class="loading loading-spinner loading-lg text-primary"></span>
-        </div>
-        
         <!-- Posts Grid -->
-        <div class="grid gap-8" id="posts-container">
-
+        <div class="grid gap-8">
           <BlogPosts 
-            posts={posts.slice(0, 6).map(post => ({
-              ...post.data,
-              slug: post.slug
-            }))} 
-            client:only="react"
+            posts={postsData} 
+            client:load
           />
-        </div>
-        
-        <!-- No Results -->
-        <div class="text-center py-12" id="no-results" style="display: none;">
-          <div class="card bg-base-100 dark:bg-base-800 shadow-lg">
-            <div class="card-body">
-              <i class="fa-solid fa-search text-6xl text-base-content/30 mb-4"></i>
-              <h3 class="text-2xl font-bold mb-2">No se encontraron resultados</h3>
-              <p class="text-base-content/70 mb-4">
-                Intenta con otros términos de búsqueda o revisa la ortografía
-              </p>
-              <button class="btn btn-primary" onclick="clearSearch()">
-                <i class="fa-solid fa-arrow-left mr-2"></i>
-                Ver todos los artículos
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pagination -->
-      <div class="flex justify-center mt-12" id="pagination" style="display: none;">
-        <div class="join">
-          <button class="join-item btn btn-outline" id="prev-page">
-            <i class="fa-solid fa-chevron-left"></i>
-          </button>
-          <div class="join-item btn btn-outline" id="page-info">
-            Página 1 de 1
-          </div>
-          <button class="join-item btn btn-outline" id="next-page">
-            <i class="fa-solid fa-chevron-right"></i>
-          </button>
         </div>
       </div>
     </main>
@@ -119,103 +78,3 @@ const postsData = posts.map(post => ({
     </aside>
   </div>
 </Layout>
-
-<script define:vars={{ postsData }}>
-  // Configuración
-  const POSTS_PER_PAGE = 6;
-  let allPosts = postsData;
-  let filteredPosts = [...allPosts];
-  let currentPage = 1;
-
-  // Elementos del DOM
-  const postsContainer = document.getElementById('posts-container');
-  const loading = document.getElementById('loading');
-  const noResults = document.getElementById('no-results');
-  const pagination = document.getElementById('pagination');
-  const totalPostsSpan = document.getElementById('total-posts');
-  const pageInfo = document.getElementById('page-info');
-  const prevPageBtn = document.getElementById('prev-page');
-  const nextPageBtn = document.getElementById('next-page');
-
-  // Funciones de utilidad
-  function getPaginatedPosts(posts, page, perPage) {
-    const start = (page - 1) * perPage;
-    const end = start + perPage;
-    return posts.slice(start, end);
-  }
-
-  function updatePagination(totalPosts, currentPage) {
-    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
-    
-    if (totalPages <= 1) {
-      pagination.style.display = 'none';
-      return;
-    }
-    
-    pagination.style.display = 'flex';
-    pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
-    
-    prevPageBtn.disabled = currentPage === 1;
-    nextPageBtn.disabled = currentPage === totalPages;
-  }
-
-  function renderPosts() {
-    loading.style.display = 'block';
-    postsContainer.style.display = 'none';
-    noResults.style.display = 'none';
-    
-    setTimeout(() => {
-      const paginatedPosts = getPaginatedPosts(filteredPosts, currentPage, POSTS_PER_PAGE);
-      
-      if (paginatedPosts.length === 0) {
-        postsContainer.style.display = 'none';
-        noResults.style.display = 'block';
-        pagination.style.display = 'none';
-      } else {
-        // Renderiza usando React
-        const root = ReactDOM.createRoot(postsContainer);
-        root.render(
-          <BlogPosts posts={paginatedPosts} />
-        );
-        postsContainer.style.display = 'block';
-        noResults.style.display = 'none';
-      }
-      
-      loading.style.display = 'none';
-      updatePagination(filteredPosts.length, currentPage);
-      totalPostsSpan.textContent = filteredPosts.length;
-    }, 300);
-  }
-
-  function clearSearch() {
-    filteredPosts = [...allPosts];
-    currentPage = 1;
-    renderPosts();
-  }
-
-  // Event Listeners para paginación
-  prevPageBtn.addEventListener('click', () => {
-    if (currentPage > 1) {
-      currentPage--;
-      renderPosts();
-    }
-  });
-
-  nextPageBtn.addEventListener('click', () => {
-    const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
-    if (currentPage < totalPages) {
-      currentPage++;
-      renderPosts();
-    }
-  });
-
-  // Escuchar eventos de búsqueda del componente BlogSearch
-  document.addEventListener('blogSearch', (e) => {
-    filteredPosts = e.detail.posts;
-    currentPage = 1;
-    renderPosts();
-  });
-
-  // Inicialización
-  renderPosts();
-</script>
