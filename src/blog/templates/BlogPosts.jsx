@@ -1,6 +1,5 @@
 import React from 'react';
 
-// BlogPosts.jsx
 export default function BlogPosts({ posts }) {
   return (
     <>
