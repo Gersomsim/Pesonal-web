@@ -3,6 +3,7 @@ title: Cómo desplegar un sitio Astro estático en Railway
 description: Guía paso a paso para desplegar un sitio Astro completamente estático en Railway de forma sencilla y eficiente.
 pubDate: 2025-06-25
 author: Gersom Hernandez
+slug: 'desplegar-sitio-estatico-en-astro-en-railway'
 tags: ['Railway', 'Astro', 'Deploy']
 ---
 

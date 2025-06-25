@@ -204,3 +204,15 @@ body {
 .dark .prose ol > li::before {
   color: rgb(75 85 99);
 }
+
+.widget {
+  @apply bg-base-100 shadow-sm rounded-lg p-4;
+}
+
+.widget-title {
+  @apply text-primary text-lg font-bold mb-4;
+}
+
+.recent-post-item {
+  @apply p-3 rounded-lg transition-colors;
+}

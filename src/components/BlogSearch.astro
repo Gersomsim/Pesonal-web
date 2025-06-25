@@ -1,0 +1,210 @@
+---
+export interface Props {
+  postsData: any[];
+  placeholder?: string;
+  showSort?: boolean;
+  showClear?: boolean;
+  compact?: boolean;
+}
+
+const { 
+  postsData, 
+  placeholder = "Buscar artículos...", 
+  showSort = true, 
+  showClear = true,
+  compact = false 
+} = Astro.props;
+---
+
+<div class="blog-search" data-posts={JSON.stringify(postsData)}>
+  <div class={`${compact ? 'space-y-3' : 'shadow-lg rounded-lg p-4'}`}>
+    <div class={`${compact ? '' : ''}`}>
+      <div class="flex flex-col lg:flex-row gap-4 items-center">
+        <!-- Search Input -->
+        <div class="form-control flex-1 w-full">
+          <div class="input-group">
+            <span class="btn btn-square btn-primary">
+              <i class="fa-solid fa-search"></i>
+            </span>
+            <input 
+              type="text" 
+              placeholder={placeholder}
+              class="input input-bordered w-full search-input" 
+            />
+          </div>
+        </div>
+        
+        <!-- Sort Options -->
+        {showSort && (
+          <div class="form-control w-full lg:w-auto">
+            <select class="select select-bordered sort-select">
+              <option value="newest">Más recientes</option>
+              <option value="oldest">Más antiguos</option>
+              <option value="title">Por título</option>
+            </select>
+          </div>
+        )}
+        
+        <!-- Clear Filters -->
+        {showClear && (
+          <button class="btn btn-outline btn-error clear-filters">
+            <i class="fa-solid fa-times mr-2"></i>
+            Limpiar
+          </button>
+        )}
+      </div>
+      
+      <!-- Search Results Info -->
+      <div class="flex items-center justify-between mt-4 search-info" style="display: none;">
+        <div class="text-sm text-base-content/70">
+          <span class="results-count">0</span> resultados encontrados
+        </div>
+        <div class="text-sm text-base-content/70">
+          Página <span class="current-page">1</span> de <span class="total-pages">1</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  class BlogSearch {
+    constructor(container) {
+      this.container = container;
+      this.postsData = JSON.parse(container.dataset.posts);
+      this.POSTS_PER_PAGE = 6;
+      this.allPosts = this.postsData;
+      this.filteredPosts = [...this.allPosts];
+      this.currentPage = 1;
+      this.currentSort = 'newest';
+      this.searchTerm = '';
+      
+      this.initElements();
+      this.bindEvents();
+      this.render();
+    }
+    
+    initElements() {
+      this.searchInput = this.container.querySelector('.search-input');
+      this.sortSelect = this.container.querySelector('.sort-select');
+      this.clearFiltersBtn = this.container.querySelector('.clear-filters');
+      this.searchInfo = this.container.querySelector('.search-info');
+      this.resultsCountSpan = this.container.querySelector('.results-count');
+      this.currentPageSpan = this.container.querySelector('.current-page');
+      this.totalPagesSpan = this.container.querySelector('.total-pages');
+    }
+    
+    bindEvents() {
+      this.searchInput.addEventListener('input', this.debounce((e) => {
+        this.searchTerm = e.target.value;
+        this.performSearch();
+      }, 300));
+      
+      if (this.sortSelect) {
+        this.sortSelect.addEventListener('change', (e) => {
+          this.currentSort = e.target.value;
+          this.performSearch();
+        });
+      }
+      
+      if (this.clearFiltersBtn) {
+        this.clearFiltersBtn.addEventListener('click', () => this.clearSearch());
+      }
+    }
+    
+    debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+    
+    sortPosts(posts, sortType) {
+      const sorted = [...posts];
+      switch (sortType) {
+        case 'newest':
+          return sorted.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+        case 'oldest':
+          return sorted.sort((a, b) => new Date(a.pubDate) - new Date(b.pubDate));
+        case 'title':
+          return sorted.sort((a, b) => a.title.localeCompare(b.title));
+        default:
+          return sorted;
+      }
+    }
+    
+    filterPosts(posts, searchTerm) {
+      if (!searchTerm.trim()) return posts;
+      
+      const term = searchTerm.toLowerCase();
+      return posts.filter(post => 
+        post.title.toLowerCase().includes(term) ||
+        post.description.toLowerCase().includes(term) ||
+        post.author.toLowerCase().includes(term) ||
+        (post.tags && post.tags.some(tag => tag.toLowerCase().includes(term)))
+      );
+    }
+    
+    performSearch() {
+      this.currentPage = 1;
+      this.filteredPosts = this.filterPosts(this.allPosts, this.searchTerm);
+      this.filteredPosts = this.sortPosts(this.filteredPosts, this.currentSort);
+      this.updateSearchInfo();
+      this.dispatchSearchEvent();
+    }
+    
+    clearSearch() {
+      this.searchInput.value = '';
+      if (this.sortSelect) this.sortSelect.value = 'newest';
+      this.searchTerm = '';
+      this.currentSort = 'newest';
+      this.currentPage = 1;
+      this.filteredPosts = [...this.allPosts];
+      this.updateSearchInfo();
+      this.dispatchSearchEvent();
+    }
+    
+    updateSearchInfo() {
+      const totalPages = Math.ceil(this.filteredPosts.length / this.POSTS_PER_PAGE);
+      
+      if (this.searchTerm || this.currentSort !== 'newest') {
+        this.searchInfo.style.display = 'flex';
+        this.resultsCountSpan.textContent = this.filteredPosts.length;
+        this.currentPageSpan.textContent = this.currentPage;
+        this.totalPagesSpan.textContent = totalPages;
+      } else {
+        this.searchInfo.style.display = 'none';
+      }
+    }
+    
+    dispatchSearchEvent() {
+      const event = new CustomEvent('blogSearch', {
+        detail: {
+          posts: this.filteredPosts,
+          totalPosts: this.filteredPosts.length,
+          currentPage: this.currentPage,
+          searchTerm: this.searchTerm,
+          sortType: this.currentSort
+        }
+      });
+      this.container.dispatchEvent(event);
+    }
+    
+    render() {
+      this.updateSearchInfo();
+      this.dispatchSearchEvent();
+    }
+  }
+  
+  // Inicializar todos los componentes de búsqueda
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.blog-search').forEach(container => {
+      new BlogSearch(container);
+    });
+  });
+</script> 

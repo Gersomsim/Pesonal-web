@@ -1,0 +1,229 @@
+---
+import BlogSearch from './BlogSearch.astro';
+import { getCollection } from 'astro:content';
+
+export interface Props {
+  currentPostSlug?: string;
+  showSearch?: boolean;
+  showRecentPosts?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showNewsletter?: boolean;
+}
+
+const { 
+  currentPostSlug,
+  showSearch = true,
+  showRecentPosts = true,
+  showTags = true,
+  showAuthor = true,
+  showNewsletter = true
+} = Astro.props;
+
+// Obtener posts para los widgets
+const allPosts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+
+const postsData = allPosts.map(post => ({
+  slug: post.slug,
+  title: post.data.title,
+  description: post.data.description,
+  author: post.data.author,
+  pubDate: post.data.pubDate.toISOString(),
+  tags: post.data.tags || []
+}));
+
+// Posts recientes (excluyendo el actual si estamos en un post)
+const recentPosts = allPosts
+  .filter(post => post.slug !== currentPostSlug)
+  .slice(0, 5);
+
+// Tags únicos
+const allTags = allPosts.flatMap(post => post.data.tags || []);
+const uniqueTags = [...new Set(allTags)];
+const tagCounts = uniqueTags.reduce((acc, tag) => {
+  acc[tag] = allTags.filter(t => t === tag).length;
+  return acc;
+}, {} as Record<string, number>);
+
+// Ordenar tags por frecuencia
+const sortedTags = Object.entries(tagCounts)
+  .sort(([,a], [,b]) => b - a)
+  .slice(0, 10);
+---
+
+<aside class="blog-sidebar space-y-6">
+  <!-- Search Widget -->
+  {showSearch && (
+    <div class="widget">
+      <h3 class="widget-title">
+        <i class="fa-solid fa-search mr-2"></i>
+        Buscar
+      </h3>
+      <BlogSearch 
+        postsData={postsData} 
+        placeholder="Buscar en el blog..."
+        compact={true}
+      />
+    </div>
+  )}
+
+  <!-- Recent Posts Widget -->
+  {showRecentPosts && recentPosts.length > 0 && (
+    <div class="widget">
+      <h3 class="widget-title">
+        <i class="fa-solid fa-clock mr-2"></i>
+        Artículos Recientes
+      </h3>
+      <div class="space-y-3">
+        {recentPosts.map((post) => (
+          <div class="recent-post-item">
+            <a href={`/blog/${post.slug}`} class="flex gap-3 group">
+              <div class="flex-1 min-w-0">
+                <h4 class="font-medium text-sm group-hover:text-primary transition-colors line-clamp-2">
+                  {post.data.title}
+                </h4>
+                <p class="text-xs text-base-content/60 mt-1">
+                  {post.data.pubDate.toLocaleDateString('es-ES', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })}
+                </p>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Tags Widget -->
+  {showTags && sortedTags.length > 0 && (
+    <div class="widget">
+      <h3 class="widget-title">
+        <i class="fa-solid fa-tags mr-2"></i>
+        Etiquetas Populares
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {sortedTags.map(([tag, count]) => (
+          <a 
+            href={`/blog?tag=${encodeURIComponent(tag)}`}
+            class="badge badge-outline badge-primary hover:badge-primary transition-all cursor-pointer"
+            data-tag={tag}
+          >
+            {tag}
+            <span class="ml-1 text-xs opacity-70">({count})</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Author Widget -->
+  {showAuthor && (
+    <div class="widget">
+      <h3 class="widget-title">
+        <i class="fa-solid fa-user mr-2"></i>
+        Sobre el Autor
+      </h3>
+      <div class="   shadow-sm rounded-lg p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="avatar placeholder">
+            <div class="bg-primary text-primary-content rounded-full w-12">
+              <span class="text-lg font-bold">GH</span>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold">Gersom Hernández</h4>
+            <p class="text-sm text-base-content/70">Desarrollador Fullstack</p>
+          </div>
+        </div>
+        <p class="text-sm text-base-content/80 mb-3">
+          Apasionado por el desarrollo web y compartir conocimientos. 
+          Especializado en Angular, Laravel y tecnologías modernas.
+        </p>
+        <div class="flex gap-2">
+          <a href="https://github.com/gersomsim" target="_blank" class="btn btn-sm btn-outline">
+            <i class="fa-brands fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/gersom-hernandez/" target="_blank" class="btn btn-sm btn-outline">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Quick Stats Widget -->
+  <div class="widget">
+    <h3 class="widget-title">
+      <i class="fa-solid fa-chart-bar mr-2"></i>
+      Estadísticas
+    </h3>
+    <div class="stats stats-vertical    shadow">
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <i class="fa-solid fa-newspaper text-2xl"></i>
+        </div>
+        <div class="stat-title">Artículos</div>
+        <div class="stat-value text-primary">{allPosts.length}</div>
+      </div>
+      
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <i class="fa-solid fa-tags text-2xl"></i>
+        </div>
+        <div class="stat-title">Etiquetas</div>
+        <div class="stat-value text-secondary">{uniqueTags.length}</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+ <style>
+  .blog-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+  }
+  
+  
+  
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .blog-sidebar {
+      position: static;
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Manejar clicks en tags para filtrar
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-tag]').forEach(tagElement => {
+      tagElement.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tag = (tagElement as HTMLElement).dataset.tag;
+        
+        // Buscar el componente de búsqueda más cercano
+        const searchContainer = document.querySelector('.blog-search');
+        if (searchContainer) {
+          const searchInput = searchContainer.querySelector('.search-input') as HTMLInputElement;
+          if (searchInput) {
+            searchInput.value = tag || '';
+            searchInput.dispatchEvent(new Event('input'));
+          }
+        }
+      });
+    });
+  });
+</script> 

@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import BlogSidebar from "../components/BlogSidebar.astro";
 import { getCollection } from 'astro:content';
 
 const { content } = Astro.props;
@@ -13,123 +14,101 @@ const recentPosts = allPosts
 ---
 
 <Layout title={content.data.title} description={content.data.description}>
-  <div class="min-h-screen">
-    <div class="container mx-auto px-4 py-8">
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <!-- Contenido principal del post -->
-        <main class="lg:col-span-3">
-          <article class="bg-white dark:bg-gray-900 dark:text-white rounded-2xl shadow-lg overflow-hidden">
-            <!-- Header del post -->
-            <div class="p-8 border-b border-gray-200 dark:border-gray-700">
-              <div class="flex items-center gap-2 mb-4">
-                <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium rounded-full">
-                  Blog
-                </span>
-                <span class="text-gray-500 dark:text-gray-400 text-sm">
-                  {content.data.pubDate.toLocaleDateString('es-ES', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </span>
-              </div>
-              
-              <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-                {content.data.title}
-              </h1>
-              
-              <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                {content.data.description}
-              </p>
-              
-              <div class="flex items-center gap-4">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
-                    <span class="text-white font-semibold text-sm">
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <!-- Contenido principal del post -->
+      <main class="lg:col-span-3">
+        <article class="  shadow-lg rounded-lg">
+          <!-- Header del post -->
+          <div class="p-8">
+            <div class="flex items-center gap-2 mb-4">
+              <div class="badge badge-primary">Blog</div>
+              <span class="text-base-content/60 text-sm">
+                <i class="fa-regular fa-calendar mr-1"></i>
+                {content.data.pubDate.toLocaleDateString('es-ES', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </span>
+            </div>
+            
+            <h1 class="text-4xl font-bold mb-4 leading-tight">
+              {content.data.title}
+            </h1>
+            
+            <p class="text-lg text-base-content/70 mb-6 leading-relaxed">
+              {content.data.description}
+            </p>
+            
+            <div class="flex items-center gap-4 mb-6">
+              <div class="flex items-center gap-3">
+                <div class="avatar placeholder">
+                  <div class="bg-primary text-primary-content rounded-full w-12">
+                    <span class="text-lg font-bold">
                       {content.data.author.charAt(0).toUpperCase()}
                     </span>
                   </div>
-                  <div>
-                    <p class="font-medium text-gray-900 dark:text-white">
-                      {content.data.author}
-                    </p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
-                      Autor
-                    </p>
-                  </div>
                 </div>
-                
-                {content.data.tags && content.data.tags.length > 0 && (
-                  <div class="flex gap-2 ml-auto">
-                    {content.data.tags.map((tag: string) => (
-                      <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-md">
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-            
-            <!-- Contenido del post -->
-            <div class="p-8 prose prose-lg max-w-none dark:prose-invert dark:text-white">
-              <slot />
-            </div>
-          </article>
-        </main>
-        
-        <!-- Aside con posts recientes -->
-        <aside class="lg:col-span-1">
-          <div class="sticky top-8">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-clock text-blue-500"></i>
-                Posts Recientes
-              </h3>
-              
-              {recentPosts.length > 0 ? (
-                <div class="space-y-4">
-                  {recentPosts.map((post) => (
-                    <article class="group">
-                      <a href={`/blog/${post.slug}`} class="block">
-                        <div class="p-4 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-md">
-                          <h4 class="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 line-clamp-2 mb-2">
-                            {post.data.title}
-                          </h4>
-                          <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-3">
-                            {post.data.description}
-                          </p>
-                          <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                            <span>{post.data.author}</span>
-                            <span>{post.data.pubDate.toLocaleDateString('es-ES', {
-                              month: 'short',
-                              day: 'numeric'
-                            })}</span>
-                          </div>
-                        </div>
-                      </a>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div class="text-center py-8">
-                  <i class="fa-solid fa-newspaper text-4xl text-gray-400 mb-4"></i>
-                  <p class="text-gray-500 dark:text-gray-400">
-                    No hay posts recientes
+                <div>
+                  <p class="font-medium">
+                    {content.data.author}
+                  </p>
+                  <p class="text-sm text-base-content/60">
+                    Autor
                   </p>
                 </div>
-              )}
-              
-              <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-                <a href="/blog" class="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors duration-200">
-                  <span>Ver todos los posts</span>
-                  <i class="fa-solid fa-arrow-right text-sm"></i>
-                </a>
               </div>
+              
+              {content.data.tags && content.data.tags.length > 0 && (
+                <div class="flex gap-2 ml-auto">
+                  {content.data.tags.map((tag: string) => (
+                    <div class="badge badge-outline badge-primary">
+                      #{tag}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
-        </aside>
-      </div>
+          
+          <!-- Contenido del post -->
+          <div class="px-8 pb-8 prose prose-lg max-w-none">
+            <slot />
+          </div>
+        </article>
+
+        <!-- Navegación entre posts -->
+        <div class="flex justify-between mt-8">
+          <a href="/blog" class="btn btn-outline">
+            <i class="fa-solid fa-arrow-left mr-2"></i>
+            Volver al blog
+          </a>
+          
+          <div class="flex gap-2">
+            <button class="btn btn-outline btn-sm" disabled>
+              <i class="fa-solid fa-chevron-left mr-1"></i>
+              Anterior
+            </button>
+            <button class="btn btn-outline btn-sm" disabled>
+              Siguiente
+              <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+      </main>
+      
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <BlogSidebar 
+          currentPostSlug={content.slug}
+          showSearch={true}
+          showRecentPosts={true}
+          showTags={true}
+          showAuthor={true}
+          showNewsletter={true}
+        />
+      </aside>
     </div>
   </div>
 </Layout>

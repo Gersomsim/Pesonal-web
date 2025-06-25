@@ -2,18 +2,255 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import BlogPost from '../../components/BlogPost.astro';
+import BlogSearch from '../../components/BlogSearch.astro';
+import BlogSidebar from '../../components/BlogSidebar.astro';
 
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
+
+// Preparar datos para el cliente
+const postsData = posts.map(post => ({
+  slug: post.slug,
+  title: post.data.title,
+  description: post.data.description,
+  author: post.data.author,
+  pubDate: post.data.pubDate.toISOString(),
+  tags: post.data.tags || []
+}));
 ---
 
-<Layout title="Mi Blog Astro" description="Bienvenido a mi blog personal">
-  <h1 class="text-4xl font-bold mb-8">Bienvenido a mi Blog</h1>
-  
-  <div class="grid gap-8">
-    {posts.slice(0, 5).map((post) => (
-      <BlogPost post={post} />
-    ))}
+<Layout title="Mi Blog Astro" description="Bienvenido a mi blog personal de desarrollo web y algunas cosas más">
+  <!-- Hero Section -->
+  <div class="hero min-h-[40vh] bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl mb-12">
+    <div class="hero-content text-center">
+      <div class="max-w-2xl">
+        <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Mi Blog
+        </h1>
+        <p class="text-xl text-base-content/80 mb-8">
+          Compartiendo conocimientos sobre desarrollo web, experiencias y todo lo que aprendo en mi camino como desarrollador
+        </p>
+        <div class="stats shadow-sm /50 backdrop-blur-sm">
+          <div class="stat">
+            <div class="stat-figure text-primary">
+              <i class="fa-solid fa-newspaper text-3xl"></i>
+            </div>
+            <div class="stat-title">Artículos</div>
+            <div class="stat-value text-primary" id="total-posts">{posts.length}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content with Sidebar -->
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+    <!-- Main Content -->
+    <main class="lg:col-span-3">
+      <!-- Search Section -->
+      <div class="mb-8">
+        <BlogSearch postsData={postsData} />
+      </div>
+
+      <!-- Posts Section -->
+      <div class="space-y-8">
+        <div class="flex items-center gap-4 mb-8">
+          <h2 class="text-3xl font-bold">Artículos</h2>
+          <div class="divider divider-primary flex-1"></div>
+        </div>
+        
+        <!-- Loading State -->
+        <div class="flex justify-center py-12" id="loading" style="display: none;">
+          <span class="loading loading-spinner loading-lg text-primary"></span>
+        </div>
+        
+        <!-- Posts Grid -->
+        <div class="grid gap-8" id="posts-container">
+          {posts.slice(0, 6).map((post) => (
+            <BlogPost post={post} />
+          ))}
+        </div>
+        
+        <!-- No Results -->
+        <div class="text-center py-12" id="no-results" style="display: none;">
+          <div class="card   shadow-lg">
+            <div class="card-body">
+              <i class="fa-solid fa-search text-6xl text-base-content/30 mb-4"></i>
+              <h3 class="text-2xl font-bold mb-2">No se encontraron resultados</h3>
+              <p class="text-base-content/70 mb-4">
+                Intenta con otros términos de búsqueda o revisa la ortografía
+              </p>
+              <button class="btn btn-primary" onclick="clearSearch()">
+                <i class="fa-solid fa-arrow-left mr-2"></i>
+                Ver todos los artículos
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center mt-12" id="pagination" style="display: none;">
+        <div class="join">
+          <button class="join-item btn btn-outline" id="prev-page">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="join-item btn btn-outline" id="page-info">
+            Página 1 de 1
+          </div>
+          <button class="join-item btn btn-outline" id="next-page">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1">
+      <BlogSidebar 
+        showSearch={true}
+        showRecentPosts={true}
+        showTags={true}
+        showAuthor={true}
+        showNewsletter={true}
+      />
+    </aside>
   </div>
 </Layout>
+
+<script define:vars={{ postsData }}>
+  // Configuración
+  const POSTS_PER_PAGE = 6;
+  let allPosts = postsData;
+  let filteredPosts = [...allPosts];
+  let currentPage = 1;
+
+  // Elementos del DOM
+  const postsContainer = document.getElementById('posts-container');
+  const loading = document.getElementById('loading');
+  const noResults = document.getElementById('no-results');
+  const pagination = document.getElementById('pagination');
+  const totalPostsSpan = document.getElementById('total-posts');
+  const pageInfo = document.getElementById('page-info');
+  const prevPageBtn = document.getElementById('prev-page');
+  const nextPageBtn = document.getElementById('next-page');
+
+  // Funciones de utilidad
+  function getPaginatedPosts(posts, page, perPage) {
+    const start = (page - 1) * perPage;
+    const end = start + perPage;
+    return posts.slice(start, end);
+  }
+
+  function updatePagination(totalPosts, currentPage) {
+    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+    
+    if (totalPages <= 1) {
+      pagination.style.display = 'none';
+      return;
+    }
+    
+    pagination.style.display = 'flex';
+    pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+    
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+  }
+
+  function renderPosts() {
+    loading.style.display = 'block';
+    postsContainer.style.display = 'none';
+    noResults.style.display = 'none';
+    
+    setTimeout(() => {
+      const paginatedPosts = getPaginatedPosts(filteredPosts, currentPage, POSTS_PER_PAGE);
+      
+      if (paginatedPosts.length === 0) {
+        postsContainer.style.display = 'none';
+        noResults.style.display = 'block';
+        pagination.style.display = 'none';
+      } else {
+        postsContainer.innerHTML = paginatedPosts.map(post => `
+          <article class="card   shadow-lg hover:shadow-xl transition-all duration-300 border border-base-300 hover:border-primary/30 group">
+            <div class="card-body">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-1">
+                  <a href="/blog/${post.slug}" class="no-underline group-hover:no-underline">
+                    <h2 class="card-title text-2xl font-bold group-hover:text-primary transition-colors duration-300 mb-3">
+                      ${post.title}
+                    </h2>
+                  </a>
+                  <p class="text-base-content/70 text-lg leading-relaxed mb-4">
+                    ${post.description}
+                  </p>
+                </div>
+              </div>
+              
+              <div class="card-actions justify-between items-center">
+                <div class="flex items-center gap-4 text-sm text-base-content/60">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-primary"></i>
+                    <span>${new Date(post.pubDate).toLocaleDateString('es-ES', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-user text-primary"></i>
+                    <span>${post.author}</span>
+                  </div>
+                </div>
+                
+                <a href="/blog/${post.slug}" class="btn btn-primary btn-sm group-hover:btn-outline transition-all duration-300">
+                  <span>Leer más</span>
+                  <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        `).join('');
+        
+        postsContainer.style.display = 'grid';
+        noResults.style.display = 'none';
+      }
+      
+      loading.style.display = 'none';
+      updatePagination(filteredPosts.length, currentPage);
+      totalPostsSpan.textContent = filteredPosts.length;
+    }, 300);
+  }
+
+  function clearSearch() {
+    filteredPosts = [...allPosts];
+    currentPage = 1;
+    renderPosts();
+  }
+
+  // Event Listeners para paginación
+  prevPageBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPosts();
+    }
+  });
+
+  nextPageBtn.addEventListener('click', () => {
+    const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderPosts();
+    }
+  });
+
+  // Escuchar eventos de búsqueda del componente BlogSearch
+  document.addEventListener('blogSearch', (e) => {
+    filteredPosts = e.detail.posts;
+    currentPage = 1;
+    renderPosts();
+  });
+
+  // Inicialización
+  renderPosts();
+</script>
