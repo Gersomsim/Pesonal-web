@@ -15,6 +15,8 @@ export default defineConfig({
     },
     syntaxHighlight: 'shiki',
   },
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+  },
   output: 'static',
 });
