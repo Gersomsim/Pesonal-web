@@ -1,6 +1,7 @@
 ---
 import BlogSearch from '../organism/BlogSearch.astro';
 import { getCollection } from 'astro:content';
+import Avatar from '../molecules/avatar.astro';
 
 export interface Props {
   currentPostSlug?: string;
@@ -129,11 +130,7 @@ const sortedTags = Object.entries(tagCounts)
       </h3>
       <div class="   shadow-sm rounded-lg p-4">
         <div class="flex items-center gap-3 mb-3">
-          <div class="avatar placeholder">
-            <div class="bg-primary text-primary-content rounded-full w-12">
-              <span class="text-lg font-bold">GH</span>
-            </div>
-          </div>
+          <Avatar src="/assets/blog/gersom.jpg" alt="Gersom Hernández" />
           <div>
             <h4 class="font-bold">Gersom Hernández</h4>
             <p class="text-sm text-base-content/70">Desarrollador Fullstack</p>

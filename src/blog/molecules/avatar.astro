@@ -1,0 +1,14 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+---
+
+<div class="avatar placeholder">
+  <div class="bg-primary text-primary-content rounded-full w-12">
+    <img src={src} alt={alt} class="w-full h-full object-cover" />
+  </div>
+</div>
