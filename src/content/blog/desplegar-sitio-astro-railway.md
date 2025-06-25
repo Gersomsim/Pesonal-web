@@ -1,10 +1,13 @@
 ---
 title: Cómo desplegar un sitio Astro estático en Railway
-description: Guía paso a paso para desplegar un sitio Astro completamente estático en Railway de forma sencilla y eficiente.
+description: Aprende paso a paso cómo desplegar tu sitio web estático creado con Astro en Railway de forma sencilla y rápida. Esta guía te muestra cómo configurar tu proyecto, conectar con GitHub y publicar tu sitio en minutos. Ideal para desarrolladores que buscan una solución alterna.
 pubDate: 2025-06-25
 author: Gersom Hernandez
 slug: 'desplegar-sitio-estatico-en-astro-en-railway'
 tags: ['Railway', 'Astro', 'Deploy']
+image:
+  url: '/assets/blog/deploy-astro-in-railway.png'
+  alt: 'Desplegar sitio Astro en Railway'
 ---
 
 Antes de comenzar, ten en cuenta que hay dos formas de desplegar un sitio hecho con Astro en Railway:
