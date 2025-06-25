@@ -1,7 +1,8 @@
 ---
 import LinkNavbar from '../components/link-navbar.astro'
 import "../styles/global.css";
-import SocialMedia from '../components/social-media.astro';
+
+const { title, description } = Astro.props;
 
 ---
 
@@ -12,8 +13,8 @@ import SocialMedia from '../components/social-media.astro';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Gersom Hernandez | Desarrollador Fullstack</title>
-		<meta name="description" content="Gersom Hernandez es un desarrollador fullstack con más de 5 años de experiencia en el desarrollo de aplicaciones web y móviles. Especializado en Angular, Laravel, PHP, PostgreSQL, MySQL y MongoDB." />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<meta name="keywords" content="Gersom Hernandez, Desarrollador Fullstack, Angular, Laravel, PHP, PostgreSQL, MySQL, MongoDB" />
 		<meta name="author" content="Gersom Hernandez" />
 		<meta name="robots" content="index, follow" />
@@ -34,7 +35,7 @@ import SocialMedia from '../components/social-media.astro';
 					</button>
 				</div>
 				<div class="flex-1">
-					<a class="btn btn-ghost text-xl handwriting">Gersom</a>
+					<a class="btn btn-ghost text-xl handwriting" href="/">Gersom</a>
 				</div>
 			</div>
 			<div class="fixed w-full md:w-1/5 left-[-100%] top-0 bottom-0 z-20 bg-gray-800/99 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)] transition-all duration-400" id="menu">
@@ -50,7 +51,7 @@ import SocialMedia from '../components/social-media.astro';
 					<LinkNavbar href="/" icon="fa-solid fa-house" text="Home" />
 					<LinkNavbar href="/" icon="fa-solid fa-user" text="Acerca de mí" />
 					<LinkNavbar href="/" icon="fa-solid fa-briefcase" text="Proyectos" />
-					<LinkNavbar href="/" icon="fa-solid fa-newspaper" text="Blog" />
+					<LinkNavbar href="/blog" icon="fa-solid fa-newspaper" text="Blog" />
 				</nav>
 			</div>
 			<div class="container mx-auto z-10 transition-all duration-400 pb-10" id="content">
