@@ -122,7 +122,7 @@ Quizá te preguntes: "¿Por qué Railway y no Vercel o Netlify?" Aunque hay buen
 - APIs backend (Laravel, NestJS, etc.)
 - Todo mi portafolio personal
 
-Por el precio de un café, evito usar varios servicios distintos.
+Por el precio de un café, evito usar varios servicios.
 
 ---
 
