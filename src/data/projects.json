@@ -14,5 +14,21 @@
     ],
     "link": "https://trello-clone-nine-puce.vercel.app",
     "linkText": "Visitar"
+  },
+  {
+    "id": 1,
+    "title": "Blog en Astro",
+    "type": "Front",
+    "status": "reciente",
+    "statusText": "Reciente",
+    "description": "Desarrollo de un blog en Astro, se utilizo Tailwind CSS para el diseño, se utilizo la api de markdown para el manejo de los articulos, los articulos se generaron con un prompt de IA, se utilizo la api de vercel para el despliegue.",
+    "technologies": [
+      {
+        "name": "Astro",
+        "github": "https://github.com/Gersomsim/md-blog"
+      }
+    ],
+    "link": "https://md-blog-xi.vercel.app",
+    "linkText": "Visitar"
   }
 ]
