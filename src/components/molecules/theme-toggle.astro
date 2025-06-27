@@ -1,0 +1,60 @@
+<button id="theme-toggle" class="theme-toggle w-12 h-6 rounded-full flex items-center justify-center relative lg:w-10 lg:h-10 text-white cursor-pointer">
+  <span class="hidden lg:block">
+    <i id="theme-icon" class="fas fa-moon "></i>
+  </span>
+  <span class="block lg:hidden w-4 h-4 bg-white rounded-full absolute left-1 transition-transform duration-200" id="mobile-toggle-ball"></span>
+
+</button>
+
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const mobileToggleBall = document.getElementById('mobile-toggle-ball');
+  const html = document.documentElement;
+  let currentTheme = localStorage.getItem('theme') || 'light';
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggle.addEventListener('touchstart', toggleTheme);
+    
+  }
+
+  // Apply saved theme
+  html.setAttribute('data-theme', currentTheme);
+        updateThemeUI();
+        
+        function updateThemeUI() {
+            if (currentTheme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+                mobileToggleBall.style.transform = 'translateX(24px)';
+                html.classList.add('dark');
+            } else {
+                themeIcon.className = 'fas fa-moon';
+                mobileToggleBall.style.transform = 'translateX(0)';
+                html.classList.remove('dark');
+            }
+        }
+        
+        function toggleTheme() {
+          console.log('click');
+          // hacer toggle con tailwind dark
+          currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+
+            html.setAttribute('data-theme', currentTheme);
+            localStorage.setItem('theme', currentTheme);
+            updateThemeUI();
+        }
+</script>
+
+<style>
+  .theme-toggle {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      transition: all 0.3s ease;
+  }
+  
+  .theme-toggle:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  }
+</style>
