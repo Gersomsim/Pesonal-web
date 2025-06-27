@@ -1,0 +1,258 @@
+---
+import Menu from '../molecules/menu.astro';
+import Logo from '../molecules/logo.astro';
+import ThemeToggle from '../molecules/theme-toggle.astro';
+---
+    <nav class="navbar w-full bg-white/80 dark:bg-neutral/80 shadow-lg navbar-slide visible">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <Logo />
+                <div class="hidden lg:flex items-center space-x-8">
+                  <Menu />
+                </div>
+                <div class="hidden lg:flex items-center space-x-4">
+                    <ThemeToggle />
+                    <a href="https://drive.google.com/file/d/1yVD3NcOUp1mQ07LS8CzzRdv0KCfZ4eZB/view?usp=drive_link" target="_blank" class="btn btn-primary bg-gradient-to-r from-blue-500 to-purple-500 border-none text-white hover:shadow-lg transform hover:scale-105 transition-all duration-200">
+                        <i class="fas fa-download mr-2"></i>
+                        Descargar CV
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="flex gap-[6px] lg:hidden hamburger text-gray-700 dark:text-gray-300">
+                    <span class="h-[2px] w-full"></span>
+                    <span class="h-[2px] w-full"></span>
+                    <span class="h-[2px] w-full"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-overlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40 opacity-0 invisible transition-all duration-300"></div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu lg:hidden fixed top-0 left-0 w-80 h-full bg-white dark:bg-gray-900 shadow-2xl z-50 overflow-y-auto">
+        <div class="p-6">
+
+            <Logo />
+            
+            <!-- Mobile Navigation -->
+            <nav class="space-y-2">
+              <Menu />
+            </nav>
+            
+            <!-- Mobile Actions -->
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div class="space-y-4">
+                    <!-- Theme Toggle Mobile -->
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-700 dark:text-gray-300 font-medium">Tema oscuro</span>
+                        <ThemeToggle />
+
+
+                        
+                    </div>
+                    
+                    
+                    <!-- Mobile CTA -->
+                    <a href="https://drive.google.com/file/d/1yVD3NcOUp1mQ07LS8CzzRdv0KCfZ4eZB/view?usp=drive_link" target="_blank" class="w-full btn btn-primary bg-gradient-to-r from-blue-500 to-purple-500 border-none text-white">
+                        <i class="fas fa-download mr-2"></i>
+                        Descargar CV
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mobile Footer -->
+            <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex justify-center space-x-4">
+                    <a href="https://www.linkedin.com/in/gersom-hernandez/" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/Gersomsim" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/Gersomsim" target="_blank" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+                <p class="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+                    © 2025 Gersom Hernandez
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    
+
+    <script>
+                
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            mobileOverlay.classList.remove('opacity-0', 'invisible');
+            mobileMenuBtn.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            mobileOverlay.classList.add('opacity-0', 'invisible');
+            mobileMenuBtn.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+        
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+        
+
+        
+        // Navbar scroll behavior
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('.navbar');
+        
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down
+                navbar.classList.remove('visible');
+            } else {
+                // Scrolling up
+                navbar.classList.add('visible');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+        
+        // Resize handler
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024 && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
+
+
+
+<style>
+      
+  
+  .gradient-bg {
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+  }
+  
+  .glass-effect {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(10px);
+  }
+  
+  .glass-effect-dark {
+      background: rgba(0, 0, 0, 1);
+      backdrop-filter: blur(10px);
+  }
+  
+  .navbar-slide {
+      transform: translateY(-100%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .navbar-slide.visible {
+      transform: translateY(0);
+  }
+  
+  .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .mobile-menu.open {
+      transform: translateX(0);
+  }
+  
+  .hamburger {
+      flex-direction: column;
+      width: 24px;
+      height: 18px;
+      cursor: pointer;
+  }
+  
+  .hamburger span {
+      background: currentColor;
+      transition: all 0.3s ease;
+      transform-origin: center;
+  }
+  
+  .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .hamburger.active span:nth-child(2) {
+      opacity: 0;
+  }
+  
+  .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+  }
+  
+ 
+  
+  
+  
+  .notification-dot {
+      animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+  }
+  
+  [data-theme="dark"] {
+      .glass-effect {
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .logo-text {
+          background: linear-gradient(135deg, #60a5fa, #a78bfa, #f472b6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+      }
+  }
+</style>
