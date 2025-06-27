@@ -1,0 +1,51 @@
+---
+const { href, icon, text } = Astro.props;
+---
+
+<a href={href} class="px-4 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors menu-item block text-gray-700 dark:text-gray-300 lg:hover:text-blue-600 lg:dark:hover:text-blue-400 font-medium lg:px-3 lg:py-2 lg:hover:bg-transparent lg:dark:hover:bg-transparent">
+  <i class={icon}></i>{text}
+</a>
+
+
+<style>
+@media (max-width: 768px) {
+  .active {
+   background-color: #74a9ff;
+   color: #fff;
+  }
+}
+
+  @media (min-width: 768px) {
+    .menu-item {
+        position: relative;
+        transition: all 0.3s ease;
+    }
+    
+    .menu-item::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .menu-item:hover::after,
+    .menu-item.active::after {
+        width: 100%;
+    }
+  }
+</style>
+
+<script>
+   const pathname = window.location.pathname;
+   const links = document.querySelectorAll('.menu-item');
+   links.forEach(link => {
+     if (link.getAttribute('href') === pathname) {
+       link.classList.add('active');
+     }
+   });
+</script>
