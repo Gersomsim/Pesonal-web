@@ -6,14 +6,12 @@
     "status": "reciente",
     "statusText": "Reciente",
     "description": "Desarrollo de un clon de Trello, con Angular, se utilizo Tailwind CSS para el diseño y el cdk de angular para la creación de componentes dinamicos. El proyecto no esta conectado a ninguna api solo se gestiona por el localstorage. usuario: admin@example.com contraseña: 1234567890",
-    "technologies": [
-      {
-        "name": "Angular",
-        "github": "https://github.com/Gersomsim/Trello-clone"
-      }
-    ],
+    "technologies": ["Angular", "Tailwind", "CDK Angular"],
     "link": "https://trello-clone-nine-puce.vercel.app",
-    "linkText": "Visitar"
+    "github": "https://github.com/Gersomsim/Trello-clone",
+    "linkText": "Demo",
+    "icon": "fa-brands fa-trello",
+    "bg": "bg-gradient-to-br from-purple-400 to-pink-400"
   },
   {
     "id": 1,
@@ -22,13 +20,11 @@
     "status": "reciente",
     "statusText": "Reciente",
     "description": "Desarrollo de un blog en Astro, se utilizo Tailwind CSS para el diseño, se utilizo la api de markdown para el manejo de los articulos, los articulos se generaron con un prompt de IA, se utilizo la api de vercel para el despliegue.",
-    "technologies": [
-      {
-        "name": "Astro",
-        "github": "https://github.com/Gersomsim/md-blog"
-      }
-    ],
+    "technologies": ["Astro", "Tailwind", "Markdown"],
     "link": "https://md-blog-xi.vercel.app",
-    "linkText": "Visitar"
+    "github": "https://github.com/Gersomsim/md-blog",
+    "linkText": "Demo",
+    "icon": "fas fa-blog",
+    "bg": "bg-gradient-to-br from-blue-400 to-purple-400"
   }
 ]

@@ -1,0 +1,286 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Profile from '../assets/38233407.jpg';
+import projects from '../data/projects.json';
+import businessProjects from '../data/business-projects.json';
+interface Project {
+  id: number;
+  title: string;
+  type: string;
+  status: string;
+  statusText: string;
+  description: string;
+  technologies: string[];
+  link: string;
+  linkText: string;
+  github: string | null;
+  icon: string;
+  bg: string;
+}
+
+interface BusinessProject {
+  id: number;
+  title: string;
+  company: string;
+  duration: string;
+  description_short: string;
+  description_long: string;
+  technologies: string[];
+  link: string;
+  linkText: string;
+  icon: string;
+  stats: {
+    title: string;
+    value: string;
+    valueColor: string;
+  }[];
+  images: {
+    url: string;
+    alt: string;
+  }[];
+}
+---
+
+<Layout title=" Proyectos" description="Proyectos personales y empresariales que he realizado a lo largo de mi carrera">
+
+    <!-- <section class="hero min-h-[60vh] gradient-bg">
+        <div class="hero-content text-center text-white">
+            <div class="max-w-md">
+                <div class="avatar mb-6">
+                    <div class="w-32 rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
+                        <div class="w-32 h-32 bg-white/20 rounded-full flex items-center justify-center">
+                            <img src={Profile.src} alt="Gersom Hernandez" class="w-32 h-32 rounded-full">
+                        </div>
+                    </div>
+                </div>
+                <h1 class="text-5xl font-bold mb-4">Gersom Hernandez</h1>
+                <p class="text-xl mb-2 opacity-90">Desarrollador Full Stack</p>
+                <p class="mb-6 opacity-80">Creando experiencias digitales excepcionales con tecnologías modernas</p>
+                <div class="flex justify-center gap-4">
+                    <button class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-primary">
+                        <i class="fab fa-github"></i>
+                        GitHub
+                    </button>
+                    <button class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-primary">
+                        <i class="fab fa-linkedin"></i>
+                        LinkedIn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+  <!-- Skills Section -->
+  <section class="py-16 bg-base-200">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Tecnologías</h2>
+        <div class="section-divider w-20 mx-auto mb-6"></div>
+        </div>
+        <div class="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div class="tech-tag badge badge-lg badge-primary p-4">Angular</div>
+        <div class="tech-tag badge badge-lg badge-secondary p-4">Astro</div>
+        <div class="tech-tag badge badge-lg badge-accent p-4">NestJs</div>
+        <div class="tech-tag badge badge-lg badge-info p-4">Laravel</div>
+        <div class="tech-tag badge badge-lg badge-error p-4">FastAPI</div>
+        <div class="tech-tag badge badge-lg badge-success p-4">MongoDB</div>
+        <div class="tech-tag badge badge-lg badge-warning p-4">PostgreSQL</div>
+        <div class="tech-tag badge badge-lg badge-success p-4">MySQL</div>
+        <div class="tech-tag badge badge-lg badge-warning p-4">Firebase</div>
+        <div class="tech-tag badge badge-lg badge-error p-4">Docker</div>
+        <div class="tech-tag badge badge-lg badge-neutral p-4">PHP</div>
+        <div class="tech-tag badge badge-lg badge-primary p-4">TypeScript</div>
+        <div class="tech-tag badge badge-lg badge-secondary p-4">Digital Ocean</div>
+        <div class="tech-tag badge badge-lg badge-accent p-4">Heroku</div>
+        <div class="tech-tag badge badge-lg badge-primary p-4">Bootstrap</div>
+        <div class="tech-tag badge badge-lg badge-secondary p-4">Tailwind</div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Proyectos Personales -->
+  <section id="personal" class="py-16 bg-base-100">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <div class="badge badge-primary badge-lg mb-4">Proyectos Personales</div>
+        <h2 class="text-4xl font-bold mb-4">Mis Creaciones</h2>
+        <p class="text-lg opacity-70 max-w-2xl mx-auto">Proyectos desarrollados por pasión y aprendizaje continuo</p>
+        <div class="section-divider w-20 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project: Project) => (
+          <div class="card bg-base-200 shadow-xl card-hover">
+            <figure class="px-6 pt-6">
+              <div class={`w-full h-48 ${project.bg} rounded-lg flex items-center justify-center`}>
+                <i class={`${project.icon} text-white text-4xl`}></i>
+              </div>
+            </figure>
+            <div class="card-body">
+              <h3 class="card-title text-xl">
+                {project.title}
+                <div class="badge badge-success">Activo</div>
+              </h3>
+              <p class="text-sm opacity-70 mb-4">
+                {project.description}
+              </p>    
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((technology: string) => (
+                  <div class="badge badge-outline badge-sm">{technology}</div>
+                ))}
+              </div>    
+              <div class="card-actions justify-between items-center">
+                <div class="flex gap-2">
+                  <a href={project.github} class="btn btn-primary btn-sm">
+                    <i class="fab fa-github"></i>
+                    Código
+                  </a>
+                  <a href={project.link} class="btn btn-outline btn-sm">
+                    <i class="fas fa-external-link-alt"></i>
+                    Demo
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+    <!-- Proyectos Empresariales -->
+  <section id="empresarial" class="py-16 bg-base-200">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <div class="badge badge-secondary badge-lg mb-4">Proyectos Empresariales</div>
+        <h2 class="text-4xl font-bold mb-4">Experiencia Profesional</h2>
+        <p class="text-lg opacity-70 max-w-2xl mx-auto">Soluciones empresariales que han impactado miles de usuarios</p>
+        <div class="section-divider w-20 mx-auto mt-6"></div>
+      </div>      
+      <div class="grid lg:grid-cols-2 gap-8">
+        {businessProjects.map((project: BusinessProject) => (
+          <div class="card bg-base-100 shadow-xl card-hover">
+            <div class="card-body">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <h3 class="card-title text-2xl mb-2">
+                    {(() => {
+                      const colors = ['primary', 'secondary', 'accent', 'success', 'info', 'warning', 'error'];
+                      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                      return (
+                        <i class={`${project.icon} text-${randomColor} mr-2`}></i>
+                      );
+                    })()}
+                    {project.title}
+                  </h3>
+                  <div class="badge badge-success mb-2">{project.company}</div>
+                  <p class="text-sm opacity-60">{project.duration}</p>
+                </div>
+                <div class="badge badge-lg badge-outline">Enterprise</div>
+              </div>
+              <p class="mb-6 text-base leading-relaxed">
+                {project.description_long}
+              </p>
+                  
+              <div class="grid grid-cols-2 gap-4 mb-6">
+                {project.stats.map((stat: { title: string, value: string, valueColor: string }) => (
+                  <div class="stat bg-base-200 rounded-lg p-3">
+                    <div class="stat-title text-xs">{stat.title}</div>
+                    <div class={`stat-value text-lg ${stat.valueColor}`}>
+                      {stat.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div class="flex flex-wrap gap-2 mb-6">
+                {project.technologies.map((technology: string) => {
+                  const badges = ['primary', 'secondary', 'accent', 'success', 'info', 'warning', 'error'];
+                  const randomBadge = badges[Math.floor(Math.random() * badges.length)];
+                  return (
+                    <div class={`badge badge-${randomBadge}`}>{technology}</div>
+                  );
+                })}
+              </div>
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <span class="text-sm">
+                  Proyecto confidencial - Datos anonimizados para proteger información empresarial
+                </span>
+              </div>
+              <div class="card-actions justify-end mt-4">
+                <button class="btn btn-primary">
+                  <i class="fas fa-eye"></i>
+                  Case Study
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+    <script>
+
+        const html = document.documentElement;
+        
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe cards for animation
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+<style>
+  .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .tech-tag {
+            transition: all 0.2s ease;
+        }
+        .tech-tag:hover {
+            transform: scale(1.05);
+        }
+        .section-divider {
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            height: 2px;
+        }
+    </style>
+</style>

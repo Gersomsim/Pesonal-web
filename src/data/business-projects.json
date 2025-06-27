@@ -1,0 +1,176 @@
+[
+  {
+    "id": 1,
+    "title": "ERP: Eco-Suite",
+    "company": "IESSUS SA de CV",
+    "duration": "01/2020 - 06/2025",
+    "description_short": "Se diseño la aplicación web, API Rest y base de datos para la empresa, modulos que se desarrollaron fueron: Almacen, Compras, Ventas, Contabilidad, Humanos, Reportes y administración de recursos.",
+    "description_long": "Se diseño la aplicación web, API Rest y base de datos para la empresa, modulos que se desarrollaron fueron: Almacen, Compras, Ventas, Contabilidad, Humanos, Reportes y administración de recursos. El sistema tiene eventos cron para realizar tareas de manera automatica y generar registros de manera automatica. El proyecto sustituyo el sistema legacy de la empresa.",
+    "technologies": [
+      "Angular",
+      "Tailwind",
+      "Flowbite",
+      "Laravel 10",
+      "PostgreSQL",
+      "Docker",
+      "Heroku",
+      "Vercel"
+    ],
+    "link": "https://eco-suite.app/sign-in",
+    "linkText": "Demo",
+    "icon": "fa-solid fa-building",
+    "stats": [
+      {
+        "title": "Modulos desarrollados",
+        "value": "+10",
+        "valueColor": "text-primary"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://ecomarket.com/images/1.jpg",
+        "alt": "EcoMarket"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "SORFI",
+    "company": "IESSUS SA de CV",
+    "duration": "01/2024 - 10/2024",
+    "description_short": "",
+    "description_long": "Se desarrollo la aplicación web para la empresa, el cual es un sistema de gestión de recursos financieros, el cual se desarrollo en Angular y se conecto a la base de datos de la empresa. El sistema controla la solicitud de recursos financieros de los empleados de la empresa. El sistema se bloquea Todos los miercoles para realizar autorizaciones de los recursos financieros.",
+    "technologies": ["Angular", "Tailwind", "Laravel 10", "PostgreSQL", "Vercel"],
+    "link": "https://sorfi.eco-suite.app",
+    "linkText": "Demo",
+    "icon": "fa-solid fa-money-bill",
+    "stats": [
+      {
+        "title": "Empleados controlados",
+        "value": "+50",
+        "valueColor": "text-success"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://ecomarket.com/images/1.jpg",
+        "alt": "EcoMarket"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Sistema Cliente Aquos",
+    "company": "Aquos Life",
+    "duration": "01/2022 - 08/2022",
+    "description_short": "",
+    "description_long": "Se desarrollo la aplicación web para la empresa, el cual es un portal de clientes en donde el usuario puede pagar sus servicios de manera online, se conecto con stripe para el pago y suscripcion de servicios. El sistema se conecto con el sistema de la empresa para obtener los datos de los clientes y los servicios contratados.",
+    "technologies": ["Laravel 8", "MySQL", "Bootstrap", "Stripe"],
+    "link": "https://cliente.aguaaquos.com",
+    "linkText": "Demo",
+    "icon": "fa-solid fa-user-group",
+    "stats": [
+      {
+        "title": "Clientes registrados",
+        "value": "+200",
+        "valueColor": "text-success"
+      },
+      {
+        "title": "Servicios contratados",
+        "value": "+500",
+        "valueColor": "text-secondary"
+      },
+      {
+        "title": "Pagos realizados",
+        "value": "+5,000",
+        "valueColor": "text-primary"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://ecomarket.com/images/1.jpg",
+        "alt": "EcoMarket"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "ERP: Aquos",
+    "company": "Aquos Life",
+    "duration": "04/2020 - 12/2021",
+    "description_short": "",
+    "description_long": "Se diseño el sistema ERP el cual cuenta con modulos de CRM, Ventas, Compras, Almacen, Contabilidad, Humanos, Reportes y administración de recursos. El diseño de la base de datos se realizo en MySQL y se desarrollo en Laravel 8 y es una aplicacion monolitica. El sistema se conecto con el sistema de la empresa para obtener los datos de los clientes y los servicios contratados tambien se conecto con stripe para monitorear los pagos de los clientes.",
+    "technologies": ["Laravel 8", "MySQL", "Bootstrap", "Stripe", "Livewire"],
+    "link": "https://aquos.eco-suite.app",
+    "linkText": "Demo",
+    "icon": "fa-solid fa-building",
+    "stats": [
+      {
+        "title": "Clientes registrados",
+        "value": "+200",
+        "valueColor": "text-success"
+      },
+      {
+        "title": "Servicios ofertados",
+        "value": "+5",
+        "valueColor": "text-secondary"
+      },
+      {
+        "title": "Pagos realizados",
+        "value": "+5,000",
+        "valueColor": "text-primary"
+      },
+      {
+        "title": "Productos gestionados",
+        "value": "+10",
+        "valueColor": "text-accent"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://ecomarket.com/images/1.jpg",
+        "alt": "EcoMarket"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "CRM Aclara",
+    "company": "Aclara SA de CV",
+    "duration": "05/2017 - 05/2020",
+    "description_short": "",
+    "description_long": "Se desarrollo el sistema CRM para la empresa, el cual es un sistema de gestion de clientes y ventas. El sistema se desarrollo en Laravel 5 y posterior a ello se migro a laravel 8. El sistema da seguimiento a los prospectos y proyectos de la empresa, el sistema es capaz de generar cotizaciones. El sistema tiene eventos cron para realizar tareas de manera automatica y generar registros de manera automatica.",
+    "technologies": ["Laravel 8", "MySQL", "Bootstrap", "Livewire"],
+    "link": "https://crm.aclara.com",
+    "linkText": "Demo",
+    "icon": "fa-solid fa-money-bill",
+    "stats": [
+      {
+        "title": "Prospectos gestionados",
+        "value": "+5,000",
+        "valueColor": "text-success"
+      },
+      {
+        "title": "Proyectos gestionados",
+        "value": "+6,000",
+        "valueColor": "text-secondary"
+      },
+      {
+        "title": "Cotizaciones realizadas",
+        "value": "+10,000",
+        "valueColor": "text-primary"
+      },
+      {
+        "title": "Productos gestionados",
+        "value": "+25,000",
+        "valueColor": "text-accent"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://ecomarket.com/images/1.jpg",
+        "alt": "EcoMarket"
+      }
+    ]
+  }
+]
