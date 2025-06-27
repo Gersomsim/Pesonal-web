@@ -1,0 +1,14 @@
+---
+const { icon, title, description, color } = Astro.props;
+---
+<div class="card bg-white shadow-xl hover-lift dark:bg-slate-700">
+  <div class="card-body text-center">
+    <div class={`w-16 h-16 bg-gradient-to-br ${color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+        <i class={icon}></i>
+    </div>
+    <h3 class="card-title justify-center text-xl mb-2">{title}</h3>
+    <p class="text-gray-600 dark:text-gray-200">
+        {description}
+    </p>
+  </div>
+</div>

@@ -20,9 +20,9 @@ const postsData = posts.map(post => ({
 }));
 ---
 
-<Layout title="Mi Blog Astro" description="Bienvenido a mi blog personal de desarrollo web y algunas cosas más">
+<Layout title="Mi Blog" description="Bienvenido a mi blog personal de desarrollo web y algunas cosas más">
   <!-- Hero Section -->
-  <div class="hero mt-5 min-h-[40vh] bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 rounded-3xl mb-12">
+  <div class="hero min-h-[40vh] bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 mb-12">
     <div class="hero-content text-center">
       <div class="max-w-2xl">
         <h1 class="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -45,7 +45,7 @@ const postsData = posts.map(post => ({
   </div>
 
   <!-- Main Content with Sidebar -->
-  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+  <div class="container mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
     <!-- Main Content -->
     <main class="lg:col-span-3">
 
