@@ -1,0 +1,313 @@
+---
+import Layout from "../layouts/Layout.astro";
+import profile from "../assets/38233407.jpg";
+import BgCard from "../components/organism/bg-card.astro";
+import CardIcon from "../components/organism/card-icon.astro";
+---
+
+<Layout title="Sobre mí" description="Sobre mí">
+
+    <!-- Hero Section -->
+    <section class="relative gradient-bg min-h-screen grow flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-20"></div>
+        <div class="container mx-auto px-4 z-10">
+            <div class="hero-content text-center text-white">
+                <div class="max-w-4xl mx-auto">
+                    <div class="avatar mb-8 floating-animation">
+                        <div class="w-40 h-40 rounded-full ring ring-white ring-offset-4 ring-offset-transparent">
+                            <div class="w-full h-full rounded-full bg-gradient-to-br from-blue-400 to-gray-600 flex items-center justify-center">
+                                <img src={profile.src} alt="Gersom Hernandez Ramos" class="w-full h-full rounded-full">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 slide-in handwriting">
+                          Gersom Hernandez
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl mb-8 text-blue-100 slide-in" style="animation-delay: 0.2s;">
+                        Desarrollador Fullstack
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center gap-4 mb-8 slide-in" style="animation-delay: 0.4s;">
+                        <div class="badge badge-lg bg-white/20 text-white border-white/30 px-4 py-2">
+                            <i class="fas fa-map-marker-alt mr-2"></i>
+                            Morelos, México
+                        </div>
+                        <div class="badge badge-lg bg-white/20 text-white border-white/30 px-4 py-2">
+                            <i class="fas fa-briefcase mr-2"></i>
+                            10+ años de experiencia
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center gap-4 slide-in" style="animation-delay: 0.6s;">
+                        <a href="#about" class="btn btn-primary btn-lg glass-effect border-white/30 hover:bg-white/20">
+                            <i class="fas fa-arrow-down mr-2"></i>
+                            Conoce más
+                        </a>
+                        <a href="#contact" class="btn btn-outline btn-lg text-white border-white hover:bg-white hover:text-gray-800">
+                          <i class="fas fa-envelope mr-2"></i>
+                          Contacto
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated shapes -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full floating-animation" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 bg-white/10 rounded-full floating-animation" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 left-20 w-12 h-12 bg-white/10 rounded-full floating-animation" style="animation-delay: 3s;"></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 ">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4 dark:text-secondary handwriting">Sobre Mí</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <BgCard title="Mi Historia" description="Soy un desarrollador fullstack apasionado con más de 10 años de experiencia creando experiencias digitales excepcionales. Mi especialidad y mi mayor gusto es el desarrollo de aplicaciones web con Angular." icon="fas fa-user-graduate mr-3 text-success" />
+                        <BgCard title="Mi Filosofía" description="Creo firmemente que el buen diseño debe ser invisible para el usuario final. Mi enfoque combina la funcionalidad técnica con la elegancia visual, siempre priorizando la accesibilidad y la experiencia del usuario." icon="fas fa-lightbulb mr-3 text-success" />
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="stats stats-vertical lg:stats-horizontal shadow-lg bg-white dark:bg-slate-700 ">
+                            <div class="stat place-items-center">
+                                <div class="stat-title text-gray-600 dark:text-gray-200">Proyectos Completados</div>
+                                <div class="stat-value text-blue-500 dark:text-blue-400">15+</div>
+                                <div class="stat-desc text-gray-500 dark:text-gray-200">En los últimos 3 años</div>
+                            </div>
+                            
+                            <div class="stat place-items-center">
+                                <div class="stat-title text-gray-600 dark:text-gray-200">Paginas web</div>
+                                <div class="stat-value text-green-500 dark:text-green-400">10+</div>
+                                <div class="stat-desc text-gray-500 dark:text-gray-200">Paginas web creadas</div>
+                            </div>
+                        </div>
+                        
+                        <div class="card bg-gray-100 dark:bg-slate-700 p-8 hover-lift">
+                            <h3 class="text-2xl font-semibold text-gray-800 dark:text-primary mb-6">
+                                <i class="fas fa-code text-success mr-3"></i>
+                                Tecnologías Principales
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700 dark:text-gray-200 font-medium">Angular</span>
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full skill-bar" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700 dark:text-gray-200 font-medium">Laravel</span>
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-green-500 h-2 rounded-full skill-bar" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-700 dark:text-gray-200 font-medium">NestJS</span>
+                                    <div class="w-32 bg-gray-200 rounded-full h-2">
+                                        <div class="bg-purple-500 h-2 rounded-full skill-bar" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                  <span class="text-gray-700 dark:text-gray-200 font-medium">PostgreSQL</span>
+                                  <div class="w-32 bg-gray-200 rounded-full h-2">
+                                      <div class="bg-cyan-500 h-2 rounded-full skill-bar" style="width: 80%"></div>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="py-20 ">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-secondary handwriting mb-4">Logros Profesionales</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-blue-500 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <CardIcon icon="fas fa-trophy text-white text-2xl" title="Gerente de sistemas" description="Gestione y coordine el equipo de desarrollo de software, asegurando la entrega de proyectos de alta calidad y cumplimiento de plazos." color="from-blue-500 to-purple-500" />
+                    <CardIcon icon="fas fa-medal text-white text-2xl" title="Desarrollador Fullstack" description="Desarrollo aplicaciones web con Angular, NestJS, Laravel y PostgreSQL, garantizando funcionalidades robustas y escalables." color="from-green-500 to-blue-500" />
+                    <CardIcon icon="fas fa-users text-white text-2xl" title="Líder de Equipo" description="Liderazgo exitoso de equipo de desarrollo de hasta 8 personas en proyectos de gran escala." color="from-purple-500 to-pink-500" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section class="py-20 dark:bg-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-secondary handwriting mb-4">Hobbies e Intereses</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-orange-500 mx-auto rounded-full"></div>
+                    <p class="text-gray-600 mt-6 text-lg max-w-2xl mx-auto dark:text-gray-200">
+                        Cuando no estoy programando, disfruto de diversas actividades que me mantienen 
+                        creativo e inspirado para seguir innovando en mi carrera profesional.
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-guitar text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Guitarra</h3>
+                        <p class="text-gray-600 dark:text-gray-200">
+                            Me gusta tocar la guitarra, me gusta tocar canciones de mis artistas favoritos.
+                        </p>
+                    </div>
+                    
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-gradient-to-br from-blue-500 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-gamepad text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Gamer</h3>
+                        <p class="text-gray-600 dark:text-gray-200">
+                            Me gusta jugar videojuegos solo o con mis amigos, mi juego favorito es The First Descendant.
+                        </p>
+                    </div>
+                    
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-code text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Programar</h3>
+                        <p class="text-gray-600 dark:text-gray-200">
+                          Me gusta programar, me gusta aprender nuevas tecnologías y ahora me gusta experimentar con la IA.
+                        </p>
+                    </div>
+                    
+                    <div class="text-center group">
+                        <div class="w-24 h-24 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-utensils text-white text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Cocina</h3>
+                        <p class="text-gray-600 dark:text-gray-200">
+                            No me gusta cocinar, pero me gusta comer, mi plato favorito es el Pollo a la naranja.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="pt-20 gradient-bg pb-10">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">¡Conectemos!</h2>
+                <p class="text-xl mb-8 text-blue-100">
+                    Siempre estoy abierto a nuevas oportunidades y colaboraciones interesantes, puedes contactarme a través de mi correo electrónico o mi perfil de LinkedIn.
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <a href="mailto:gersomhernandez@me.com" class="card glass-effect hover-lift p-6 text-center">
+                        <i class="fas fa-envelope text-3xl mb-4"></i>
+                        <h3 class="text-lg font-semibold mb-2">Email</h3>
+                        <p class="text-blue-100">gersomhernandez(at)me.com</p>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/gersom-hernandez" target="_blank" class="card glass-effect hover-lift p-6 text-center">
+                        <i class="fab fa-linkedin text-3xl mb-4"></i>
+                        <h3 class="text-lg font-semibold mb-2">LinkedIn</h3>
+                        <p class="text-blue-100">gersom-hernandez</p>
+                    </a>
+                    
+                    <a href="https://github.com/Gersomsim" target="_blank" class="card glass-effect hover-lift p-6 text-center">
+                        <i class="fab fa-github text-3xl mb-4"></i>
+                        <h3 class="text-lg font-semibold mb-2">GitHub</h3>
+                        <p class="text-blue-100">Gersomsim</p>
+                    </a>
+                </div>
+                
+                <div class="flex justify-center">
+                    <a href="https://drive.google.com/file/d/1yVD3NcOUp1mQ07LS8CzzRdv0KCfZ4eZB/view?usp=drive_link" target="_blank" class="btn btn-primary btn-lg bg-white text-gray-800 hover:bg-gray-100 border-none">
+                        <i class="fas fa-download mr-2"></i>
+                        Descargar CV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    entry.target.classList.add('slide-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.card, .stats, h2, h3').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Skill bars animation
+        const skillBars = document.querySelectorAll('.skill-bar');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.style.width;
+                }
+            });
+        });
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+<style>
+  
+  .gradient-bg {
+      background: linear-gradient(135deg, #000000 0%, #005596 50%, #01bce4 100%);
+  }
+  
+</style>
