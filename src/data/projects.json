@@ -14,7 +14,7 @@
     "bg": "bg-gradient-to-br from-purple-400 to-pink-400"
   },
   {
-    "id": 1,
+    "id": 2,
     "title": "Blog en Astro",
     "type": "Front",
     "status": "reciente",
@@ -26,5 +26,33 @@
     "linkText": "Demo",
     "icon": "fas fa-blog",
     "bg": "bg-gradient-to-br from-blue-400 to-purple-400"
+  },
+  {
+    "id": 3,
+    "title": "Api de gestion de tareas",
+    "type": "Back",
+    "status": "finalizado",
+    "statusText": "Finalizado",
+    "description": "Desarrollo de una api de gestion de tareas, se utilizo NestJs, TypeOrm para manejar Postgress, esta api se desplego en Railway.",
+    "technologies": ["NestJs", "TypeOrm", "Postgress", "Railway"],
+    "link": "https://todo-app-backend-production-8e90.up.railway.app/api",
+    "github": "https://github.com/Gersomsim/Todo-App-Backend",
+    "linkText": "Demo",
+    "icon": "fas fa-tasks",
+    "bg": "bg-gradient-to-br from-gray-900 to-gray-600"
+  },
+  {
+    "id": 4,
+    "title": "Gestor de tareas",
+    "type": "Front",
+    "status": "finalizado",
+    "statusText": "Finalizado",
+    "description": "Desarrollo de una aplicacion de gestion de tareas, se utilizo Angular, Tailwind CSS para el diseño y el CDK de angular, se utilizo la api de gestion de tareas, esta aplicacion se despliega en Vercel.",
+    "technologies": ["Angular 18", "Tailwind", "CDK Angular", "Vercel"],
+    "link": "https://todo-app-lac-delta.vercel.app",
+    "github": "https://github.com/Gersomsim/Todo-App",
+    "linkText": "Demo",
+    "icon": "fas fa-tasks",
+    "bg": "bg-gradient-to-br from-blue-900 via-green-900 to-cyan-300"
   }
 ]
