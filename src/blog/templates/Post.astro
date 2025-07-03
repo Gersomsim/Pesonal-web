@@ -14,7 +14,7 @@ const recentPosts = allPosts
   .filter(post => post.slug !== content.slug); // Excluir el post actual
 ---
 
-<Layout title={content.data.title} description={content.data.description}>
+<Layout title={content.data.title} description={content.data.description} type="article" url="https://gersomhernandez.com" imageURL={content.data.image.url} author={content.data.author} publishDate={content.data.pubDate.toISOString()}>
   <div class="container mx-auto px-4 grow mb-10">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
       <!-- Contenido principal del post -->
